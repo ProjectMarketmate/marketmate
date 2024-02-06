@@ -42,7 +42,7 @@ class _WelcomeViewState extends State<WelcomeView> {
 
            Padding(
              padding: const EdgeInsets.symmetric(horizontal: 20),
-             child: RoundButton(title: "Get Started", onPressed:(){
+             child: RoundButton(title: "Get Start now", onPressed:(){
               Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInView()));
              }),
            ),
