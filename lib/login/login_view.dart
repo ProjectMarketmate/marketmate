@@ -28,6 +28,8 @@ class _LoginViewState extends State<LoginView> {
     var media =MediaQuery.sizeOf(context);
     return  Stack(
       children: [
+
+        
         Container(
           color: Colors.white,
           child: Image.asset("assets/images/Rectangle 17.png",width: media.width,height: media.height,fit: BoxFit.cover,)),
