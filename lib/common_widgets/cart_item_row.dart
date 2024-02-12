@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketmate/common/color_extension.dart';
+import 'package:marketmate/app/utils/color_extension.dart';
+import 'package:marketmate/features/home/widgets/itemcounterwidget.dart';
 
 class CartItemRow extends StatelessWidget {
   final Map pObj;
@@ -55,47 +56,7 @@ class CartItemRow extends StatelessWidget {
            
             children: [
               //counter buttons start
-                 InkWell(
-                          
-                          onTap: (){},
-                          child: Container(width: 40,
-                        
-                height: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xffF2F3F2),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Tcolor.placeholder.withOpacity(0.5),width: 1)
-                )
-                ,
-                child:Icon(Icons.remove,size: 25,color: Tcolor.primaryText,),)
-                        ),
-                        const SizedBox(width: 15,),
-                        Text(pObj['qty'].toString(),
-              style: TextStyle(color: Tcolor.primaryText,
-              fontSize: 16,
-              fontWeight: FontWeight.w600),),
-              const SizedBox(width: 15,),
-
-                //         Text("1",style: TextStyle(
-                //             color: Tcolor.primaryText,fontSize: 18,fontWeight: FontWeight.w600
-                //           ),),
-                // ),
-                InkWell(
-                          
-                          onTap: (){},
-                          child: Container(width: 40,
-                        
-                height: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xffF2F3F2),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Tcolor.placeholder.withOpacity(0.5),width: 1)
-                )
-                ,
-                child:Icon(Icons.add,size: 25,color: Tcolor.primary,),)
-                        ),
+                ItemCounterWidget(),
 
                         //counter button ends
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketmate/common/color_extension.dart';
+import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/common_widgets/favorite_item_row.dart';
 import 'package:marketmate/common_widgets/roundbutton.dart';
 

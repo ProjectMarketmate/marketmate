@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:marketmate/common/color_extension.dart';
+import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/common_widgets/explore_card.dart';
 import 'package:marketmate/explore/exploredetail_view.dart';
 import 'package:marketmate/explore/search_view.dart';
-import 'package:marketmate/home/Product_details_view.dart';
+import 'package:marketmate/features/home/views/Product_details_view.dart';
 
 
 class ExploreView extends StatefulWidget {

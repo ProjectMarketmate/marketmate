@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketmate/common/color_extension.dart';
+import 'package:marketmate/app/utils/color_extension.dart';
 
 class CategoryCard extends StatelessWidget {
   final Map pObj;

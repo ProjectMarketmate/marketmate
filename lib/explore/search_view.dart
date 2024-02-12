@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:marketmate/common/color_extension.dart';
+import 'package:marketmate/app/utils/color_extension.dart';
 
-import 'package:marketmate/common_widgets/product_card.dart';
+import 'package:marketmate/features/home/widgets/product_card.dart';
 
 
 class SearchView extends StatefulWidget {
@@ -131,7 +131,7 @@ List searchArr =[
             itemCount: searchArr.length,
              itemBuilder: (context,index){
               var pObj = searchArr[index] as Map? ?? {};
-               return ProductCard(pObj: pObj, onPressed: (){}, onCart: (){},margin: 0,weight: double.maxFinite,);
+              //  return ProductCard(pObj: pObj, onPressed: (){}, onCart: (){},margin: 0,weight: double.maxFinite,);
              })      
          
       
