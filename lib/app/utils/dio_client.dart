@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final isDev = false;
 
 final _baseOptions = BaseOptions(
-  baseUrl:isDev? "http://127.0.0.1:8000/api" : "http://128.199.24.254/api",
+  baseUrl:isDev? "http://127.0.0.1:8000/api" : "http://165.232.187.21/api",
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
