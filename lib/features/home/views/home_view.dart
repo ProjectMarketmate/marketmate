@@ -60,16 +60,7 @@ class _HomeViewState extends State<HomeView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        "Hello, ${user.firstName} ${user.lastName}",
-                        style: TextStyle(
-                            color: Tcolor.primaryText,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
+                   
                     SizedBox(
                       height: media.width * 0.03,
                     ),
