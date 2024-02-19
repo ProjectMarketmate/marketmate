@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:marketmate/common/color_extension.dart';
+import 'package:marketmate/app/utils/color_extension.dart';
 
 import 'package:marketmate/common_widgets/line_textfield.dart';
 
 import 'package:marketmate/common_widgets/roundbutton.dart';
 
-import 'package:marketmate/login/sign_up_view.dart';
-import 'package:marketmate/main_tabview/main_tabview.dart';
+import '../features/auth/views/sign_up_view.dart';
+import '../features/common/views/main_tabview.dart';
+
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
