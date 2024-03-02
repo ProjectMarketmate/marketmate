@@ -4,9 +4,9 @@ import 'package:marketmate/app/utils/color_extension.dart';
 
 import 'package:marketmate/common_widgets/app_text.dart';
 import 'package:marketmate/common_widgets/roundbutton.dart';
-import 'package:marketmate/features/common/models/productmodel.dart';
 import 'package:marketmate/features/home/widgets/itemcounterwidget.dart';
 
+import '../../common/models/products.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.product});
@@ -17,186 +17,235 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-   int amount =1;
+  int amount = 1;
   @override
   Widget build(BuildContext context) {
-    var media =MediaQuery.sizeOf(context);
-    return  Scaffold(
-      body:    
-         SingleChildScrollView(
-          child: Column(
-            
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [ 
-
-              Stack(alignment:Alignment.topCenter,
+    var media = MediaQuery.sizeOf(context);
+    return Scaffold(
+        body: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Container(
+            width: double.maxFinite,
+            height: media.width * 0.8,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: Color(0xffF2F3F2),
+                borderRadius: BorderRadius.circular(15)),
+            child: Hero(
+                tag: widget.product.id,
+                child: Image.network(widget.product.thumbnail)),
+          ),
+          SafeArea(
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Image.asset(
+                    "assets/images/Frame.png",
+                    width: 20,
+                    height: 20,
+                  )),
+            ),
+          ),
+        ],
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Container(width: double.maxFinite,
-                height: media.width*0.8,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xffF2F3F2),
-                  borderRadius: BorderRadius.circular(15)
-                )
-                ,
-                child:Hero(
-                  tag:widget.product.id,
-                  child: Image.network(widget.product.image)),
-
+                Expanded(
+                  child: Text(
+                    widget.product.name,
+                    style: TextStyle(
+                        color: Tcolor.primaryText,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-                SafeArea(child: 
-               AppBar(backgroundColor: Colors.transparent,
-    elevation: 0,
-      leading: IconButton(onPressed: (){Navigator.pop(context);}, 
-      icon:Image.asset("assets/images/Frame.png",width: 20,height: 20,) ),
-               
-      ),),
-              ],),
-              
-
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                          Expanded(
-                            child: Text(widget.product.name,style: TextStyle(
-                              color: Tcolor.primaryText,fontSize: 24,fontWeight: FontWeight.w700
-                            ),),
-                          ),
-
-                        IconButton(onPressed: (){}, 
-      icon:Icon(Icons.favorite_border_outlined,size: 25,) )
-                        
-                      ],
-                    ),
-                    Text("qty${widget.product.quantityInStock}",style: TextStyle(
-                              color: Tcolor.secondaryText,fontSize: 16,fontWeight: FontWeight.w600
-                            ),),
-                            const SizedBox(height: 15,),
-                            Row(
-                      children: [
-                       ItemCounterWidget(),
-                        Spacer(),
-                          Text("Rs.${widget.product.price}",style: TextStyle(
-                            color: Tcolor.primaryText,fontSize: 24,fontWeight: FontWeight.w700
-                          ),),
-
-                       
-                        
-                      ],
-                    ),
-                    const SizedBox(height: 15,),
-                    const Divider(color: Colors.black26,height: 1,),
-                    
-
-                    const SizedBox(height: 15,),
-                    Row(
-                      children: [
-                          Expanded(
-                            child: Text("Product deatils",style: TextStyle(
-                              color: Tcolor.primaryText,fontSize: 16,fontWeight: FontWeight.w500
-                            ),),
-                          ),
-
-                        IconButton(onPressed: (){}, 
-      icon:Icon(Icons.arrow_drop_down,size: 30,) )
-                        
-                      ],
-                    ),
-                    Text("Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",style: TextStyle(
-                            color: Tcolor.secondaryText,fontSize: 13,fontWeight: FontWeight.w500
-                          ),),
-
-                    const SizedBox(height: 15,),
-                     
-                    const Divider(color: Colors.black26,height: 1,),
-                    
-
-                    const SizedBox(height: 15,),
-                    Row(
-                      children: [
-                          Expanded(
-                            child: Text("Nutritions",style: TextStyle(
-                              color: Tcolor.primaryText,fontSize: 16,fontWeight: FontWeight.w500
-                            ),),
-                          ),
-                           Container(
-                       padding: const EdgeInsets.symmetric(vertical: 4,horizontal:8 ), 
-                height: 25,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Tcolor.placeholder.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: Tcolor.placeholder.withOpacity(0.5),width: 1)
-                )
-                ,
-                child:Text("100g",style: TextStyle(
-                            color: Tcolor.primaryText,fontSize: 9,fontWeight: FontWeight.w600
-                          ),),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.favorite_border_outlined,
+                      size: 25,
+                    ))
+              ],
+            ),
+            Text(
+              "qty${widget.product.stockAvailable}",
+              style: TextStyle(
+                  color: Tcolor.secondaryText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                ItemCounterWidget(),
+                Spacer(),
+                Text(
+                  "Rs.${widget.product.mrp}",
+                  style: TextStyle(
+                      color: Tcolor.primaryText,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700),
                 ),
-
-                        IconButton(onPressed: (){}, 
-      icon:Icon(Icons.arrow_forward_ios,size: 20,) )
-                        
-                      ],
-                    ),
-                    const SizedBox(height: 15,),
-                     
-                    const Divider(color: Colors.black26,height: 1,),
-                    
-
-                    const SizedBox(height: 15,),
-                    Row(
-                      children: [
-                          Expanded(
-                            child: Text("Review",style: TextStyle(
-                              color: Tcolor.primaryText,fontSize: 16,fontWeight: FontWeight.w500
-                            ),),
-                          ),RatingBar.builder(
-                           initialRating: 5,
-                           minRating: 1,
-                           direction: Axis.horizontal,
-                           allowHalfRating: true,
-                           itemCount: 5,
-                           itemSize: 18,
-                           itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
-                           itemBuilder: (context, _) => const Icon(
-                             Icons.star,
-                             color: Colors.amber,
-                           ),
-                           onRatingUpdate: (rating) {
-                             print(rating);
-                           },
-                          ),
-                          
-
-                        IconButton(onPressed: (){}, 
-      icon:Icon(Icons.arrow_forward_ios,size: 20,) )
-                        
-                      ],
-                    ),
-                    const SizedBox(height: 8,),
-
-                       RoundButton(title:"Add To Basket", onPressed: (){}),
-                  ],
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Divider(
+              color: Colors.black26,
+              height: 1,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "Product deatils",
+                    style: TextStyle(
+                        color: Tcolor.primaryText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
-              )])));
-      
-      
-      
-      
-      
-      
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      size: 30,
+                    ))
+              ],
+            ),
+            Text(
+              "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
+              style: TextStyle(
+                  color: Tcolor.secondaryText,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Divider(
+              color: Colors.black26,
+              height: 1,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "Nutritions",
+                    style: TextStyle(
+                        color: Tcolor.primaryText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  height: 25,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Tcolor.placeholder.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                          color: Tcolor.placeholder.withOpacity(0.5),
+                          width: 1)),
+                  child: Text(
+                    "100g",
+                    style: TextStyle(
+                        color: Tcolor.primaryText,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 20,
+                    ))
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Divider(
+              color: Colors.black26,
+              height: 1,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "Review",
+                    style: TextStyle(
+                        color: Tcolor.primaryText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                RatingBar.builder(
+                  initialRating: 5,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemSize: 18,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {
+                    print(rating);
+                  },
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 20,
+                    ))
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            RoundButton(title: "Add To Basket", onPressed: () {}),
+          ],
+        ),
+      )
+    ])));
+
     //   SafeArea(child:
     //    Column(
     //      children: [
     //        Container(
 
-      
     //         width: double.infinity,
     //         height:MediaQuery.of(context).size.height *0.3,
     //          decoration: BoxDecoration(
@@ -212,8 +261,6 @@ class _ProductDetailsState extends State<ProductDetails> {
     //             begin: const FractionalOffset(0.0, 0.0),
     //             end: const FractionalOffset(0.0, 1.0),
     //          ),
-            
-
 
     //   ),
     //        child: Image(
@@ -241,7 +288,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     //                   ),
     //                   trailing: const Icon(Icons.favorite_border_outlined,)
     //                 ),
-                
+
     //                  Row(
     //                   children: [
     //                     ItemCounterWidget(
@@ -261,7 +308,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     //                       ),
     //                     )
     //               ]),
-                
+
     //               const Divider(thickness: 1,),
     //               getProductDataRowWidget('Product Details'),
     //                const Divider(thickness: 1,),
@@ -274,85 +321,72 @@ class _ProductDetailsState extends State<ProductDetails> {
     //                 ,
     //                RoundButton(title: "Add to basket", onPressed: (){}),
 
-
-                    
-                      
-                     
-                  
-                    
-                  
-    
-    
     //   ]) ))],
     //    )
     // ));
   }
-  
-  }
+}
 
-
-  Widget getProductDataRowWidget(String label, {Widget? customWidget}) {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 20,
-        bottom: 20,
-      ),
-      child: Row(
-        children: [
-          AppText(text: label, fontWeight: FontWeight.w600, fontSize: 16),
-          Spacer(),
-          if (customWidget != null) ...[
-            customWidget,
-            SizedBox(
-              width: 20,
-            )
-          ],
-          Icon(
-            Icons.arrow_forward_ios,
-            size: 20,
+Widget getProductDataRowWidget(String label, {Widget? customWidget}) {
+  return Container(
+    margin: EdgeInsets.only(
+      top: 20,
+      bottom: 20,
+    ),
+    child: Row(
+      children: [
+        AppText(text: label, fontWeight: FontWeight.w600, fontSize: 16),
+        Spacer(),
+        if (customWidget != null) ...[
+          customWidget,
+          SizedBox(
+            width: 20,
           )
         ],
-      ),
-    );
-
-    
-  }
-
-   Widget nutritionWidget() {
-    return Container(
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: Color(0xffEBEBEB),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: AppText(
-        text: "100gm",
-        fontWeight: FontWeight.w600,
-        fontSize: 12,
-        color: Color(0xff7C7C7C),
-      ),
-    );
-  }
-
-   Widget ratingWidget() {
-    Widget starIcon() {
-      return Icon(
-        Icons.star,
-        color: Color(0xffF3603F),
-        size: 20,
-      );
-    }
-
-    return Row(
-      children: [
-        starIcon(),
-        starIcon(),
-        starIcon(),
-        starIcon(),
-        starIcon(),
+        Icon(
+          Icons.arrow_forward_ios,
+          size: 20,
+        )
       ],
+    ),
+  );
+}
+
+Widget nutritionWidget() {
+  return Container(
+    padding: EdgeInsets.all(5),
+    decoration: BoxDecoration(
+      color: Color(0xffEBEBEB),
+      borderRadius: BorderRadius.circular(5),
+    ),
+    child: AppText(
+      text: "100gm",
+      fontWeight: FontWeight.w600,
+      fontSize: 12,
+      color: Color(0xff7C7C7C),
+    ),
+  );
+}
+
+Widget ratingWidget() {
+  Widget starIcon() {
+    return Icon(
+      Icons.star,
+      color: Color(0xffF3603F),
+      size: 20,
     );
   }
+
+  return Row(
+    children: [
+      starIcon(),
+      starIcon(),
+      starIcon(),
+      starIcon(),
+      starIcon(),
+    ],
+  );
+}
 
 
 
