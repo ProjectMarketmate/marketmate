@@ -7,7 +7,6 @@ import 'package:marketmate/common_widgets/line_textfield.dart';
 import 'package:marketmate/common_widgets/roundbutton.dart';
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
 
-
 import 'package:marketmate/features/auth/views/sign_up_view.dart';
 import 'package:marketmate/features/common/views/main_tabview.dart';
 
@@ -19,8 +18,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  TextEditingController txtEmail = TextEditingController(text:"admin@test.com");
-  TextEditingController txtPassword = TextEditingController(text:"1234");
+  TextEditingController txtEmail =
+      TextEditingController(text: "amjad@gmail.com");
+  TextEditingController txtPassword = TextEditingController(text: "1234");
   bool isShow = false;
 
   @override
@@ -131,20 +131,20 @@ class _LoginViewState extends State<LoginView> {
                         height: media.width * 0.1,
                       ),
                       BlocConsumer<AuthCubit, AuthState>(
-                        
-                        
-        
-                      listener: (context, state) {
-                        if (state is AuthSuccess) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const MainTab()));
-                        }
+                        listener: (context, state) {
+                          if (state is AuthSuccess) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainTab()));
+                          }
 
-                        if (state is AuthFailed) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Login Failed"),
-                          ));
-                        }
-                      },
+                          if (state is AuthFailed) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Login Failed"),
+                            ));
+                          }
+                        },
                         builder: (context, state) {
                           if (state is AuthLoading) {
                             return const Center(
@@ -154,10 +154,10 @@ class _LoginViewState extends State<LoginView> {
                           return RoundButton(
                               title: "Log In",
                               onPressed: () {
-                               context.read<AuthCubit>().login(
-                                 email: txtEmail.text,
-                                 password: txtPassword.text,
-                               );
+                                context.read<AuthCubit>().login(
+                                      email: txtEmail.text,
+                                      password: txtPassword.text,
+                                    );
                               });
                         },
                       ),
