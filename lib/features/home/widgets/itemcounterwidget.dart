@@ -50,7 +50,10 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
   }
    void DecrementAmount() {
     setState(() {
-      amount = amount - 1;
+      if(amount!=0){
+        amount=amount-1;
+
+      }
       updateParent();
     });
   }

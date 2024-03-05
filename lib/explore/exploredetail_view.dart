@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
-import 'package:marketmate/features/home/widgets/product_card.dart';
+
 import 'package:marketmate/explore/filter_view.dart';
+
 
 
 class ExploreDetail extends StatefulWidget {
   final Map eObj;
-  const ExploreDetail({super.key, required this.eObj});
+  
+  const ExploreDetail({super.key, required this.eObj,});
 
   @override
   State<ExploreDetail> createState() => _ExploreDetailState();
 }
 
 class _ExploreDetailState extends State<ExploreDetail> {
-  @override
- 
-  
-List listArr =[
+  List listArr =[
 {
   "name":"Diet Coke",
   "icon":"assets/images/beverages_images/diet_coke.png",

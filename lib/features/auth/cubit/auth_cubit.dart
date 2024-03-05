@@ -21,7 +21,7 @@ void login({
     })async{
       emit(AuthLoading());
       try {
-        final resp = await dioClient.post('/account/login/', data: {
+        final resp = await dioClient.post('/app/account/login/', data: {
           "email": email,
           "password": password,
         });

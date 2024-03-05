@@ -3,7 +3,7 @@ import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/common_widgets/explore_card.dart';
 import 'package:marketmate/explore/exploredetail_view.dart';
 import 'package:marketmate/explore/search_view.dart';
-import 'package:marketmate/features/home/views/Product_details_view.dart';
+
 
 
 class ExploreView extends StatefulWidget {
@@ -137,7 +137,7 @@ List findProductsArr =[
                itemBuilder: (context,index){
                 var pObj =findProductsArr[index] as Map? ?? {};
                  return ExploreCard(pObj: pObj, onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExploreDetail(eObj: pObj)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExploreDetail(eObj: pObj,)));
                  });
                }),
           )

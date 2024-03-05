@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
-import 'package:marketmate/features/home/widgets/product_card.dart';
+
 
 
 class SearchView extends StatefulWidget {

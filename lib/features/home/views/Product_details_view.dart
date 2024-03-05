@@ -4,6 +4,7 @@ import 'package:marketmate/app/utils/color_extension.dart';
 
 import 'package:marketmate/common_widgets/app_text.dart';
 import 'package:marketmate/common_widgets/roundbutton.dart';
+import 'package:marketmate/features/cart/views/my_cart.dart';
 import 'package:marketmate/features/common/models/productmodel.dart';
 import 'package:marketmate/features/home/widgets/itemcounterwidget.dart';
 
@@ -181,7 +182,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                     const SizedBox(height: 8,),
 
-                       RoundButton(title:"Add To Basket", onPressed: (){}),
+                       RoundButton(title:"Add To Basket", onPressed: (){
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>MyCart()) );
+                       }),
                   ],
                 ),
               )])));

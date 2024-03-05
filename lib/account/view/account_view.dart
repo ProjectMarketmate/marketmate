@@ -4,7 +4,7 @@ import 'package:marketmate/account/widgets/account_row.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
 import 'package:marketmate/features/auth/views/login_view.dart';
-import 'package:marketmate/features/cart/views/checkout_view.dart';
+
 
 class AccountView extends StatefulWidget {
   const AccountView({super.key});
