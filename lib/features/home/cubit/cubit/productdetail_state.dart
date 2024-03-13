@@ -4,7 +4,9 @@ part of 'productdetail_cubit.dart';
 sealed class ProductdetailState {}
 
 final class ProductdetailInitial extends ProductdetailState {}
+
 final class ProductdetailLoading extends ProductdetailState {}
+
 final class ProductdetailSuccess extends ProductdetailState {
   final List<Product> products;
   ProductdetailSuccess({required this.products});

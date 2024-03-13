@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
-import 'package:marketmate/common_widgets/line_textfield.dart';
+import 'package:marketmate/app/common/widgets/line_textfield.dart';
 
-import 'package:marketmate/common_widgets/roundbutton.dart';
+import 'package:marketmate/app/common/widgets/roundbutton.dart';
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
 
 import 'package:marketmate/features/auth/views/sign_up_view.dart';
-import 'package:marketmate/features/common/views/main_tabview.dart';
+import 'package:marketmate/app/common/views/main_screen.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -136,7 +136,7 @@ class _LoginViewState extends State<LoginView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MainTab()));
+                                    builder: (context) => const MainScreen()));
                           }
 
                           if (state is AuthFailed) {

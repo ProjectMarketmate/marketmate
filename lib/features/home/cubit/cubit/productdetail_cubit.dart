@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:marketmate/app/utils/dio_client.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/models/products.dart';
+import '../../../../app/common/models/products.dart';
 
 part 'productdetail_state.dart';
 

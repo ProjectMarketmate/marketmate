@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
-import 'package:marketmate/common_widgets/app_text.dart';
-import 'package:marketmate/common_widgets/roundbutton.dart';
+import 'package:marketmate/app/common/widgets/app_text.dart';
+import 'package:marketmate/app/common/widgets/roundbutton.dart';
 import 'package:marketmate/features/home/widgets/itemcounterwidget.dart';
 
-import '../../common/models/products.dart';
+import '../../../app/common/models/products.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.product});
@@ -36,8 +36,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 color: Color(0xffF2F3F2),
                 borderRadius: BorderRadius.circular(15)),
             child: Hero(
-                tag: widget.product.id,
-                child: Image.network(widget.product.thumbnail)),
+                tag: widget.product.id!,
+                child: Image.network(widget.product.thumbnail??"")),
           ),
           SafeArea(
             child: AppBar(
@@ -65,7 +65,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.product.name,
+                    widget.product.name??"",
                     style: TextStyle(
                         color: Tcolor.primaryText,
                         fontSize: 24,
@@ -92,7 +92,13 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             Row(
               children: [
-                ItemCounterWidget(),
+                ItemCounterWidget(
+                  onAmountChanged: (p0) {
+                   setState(() {
+                     amount = p0;
+                   });
+                  },
+                ),
                 Spacer(),
                 Text(
                   "Rs.${widget.product.mrp}",
@@ -388,24 +394,6 @@ Widget ratingWidget() {
   );
 }
 
+//        Scaffold(backgroundColor: Colors.white,
 
-
-
-
-
-    //        Scaffold(backgroundColor: Colors.white,
-            
-      
-    
-    //////////////////////////////////
-              
-      
-
-              
-              
-              
-
-
-                
-                
-               
+//////////////////////////////////

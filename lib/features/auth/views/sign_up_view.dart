@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
-import 'package:marketmate/common_widgets/line_textfield.dart';
+import 'package:marketmate/app/common/widgets/line_textfield.dart';
 
-import 'package:marketmate/common_widgets/roundbutton.dart';
+import 'package:marketmate/app/common/widgets/roundbutton.dart';
 import 'package:marketmate/features/auth/views/login_view.dart';
 
 import '../cubit/signup/signup_cubit.dart';
-
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -62,7 +61,6 @@ class _SignupViewState extends State<SignupView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      
                       SizedBox(
                         height: media.width * 0.01,
                       ),
@@ -175,17 +173,18 @@ class _SignupViewState extends State<SignupView> {
                       BlocConsumer<SignupCubit, SignupState>(
                         listener: (context, state) {
                           if (state is SignupFailed) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(state.error),
-                                ),
-                              );
-                          } 
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(state.error),
+                              ),
+                            );
+                          }
 
                           if (state is SignupSuccess) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text("Signup Success, Please Login Now"),
+                                content:
+                                    Text("Signup Success, Please Login Now"),
                               ),
                             );
                             Navigator.pushReplacement(
@@ -195,20 +194,21 @@ class _SignupViewState extends State<SignupView> {
                           }
                         },
                         builder: (context, state) {
-                          if(state is SignupLoading) {
+                          if (state is SignupLoading) {
                             return Center(
                               child: CircularProgressIndicator(),
                             );
                           }
                           return RoundButton(
-                              title: "Sign Up", onPressed: () {
+                              title: "Sign Up",
+                              onPressed: () {
                                 context.read<SignupCubit>().signup(
-                                  firstName: txtFirstname.text,
-                                  lastname: txtLastname.text,
-                                  mobile: txtMobile.text,
-                                  email: txtEmail.text,
-                                  password: txtPassword.text,
-                                );
+                                      firstName: txtFirstname.text,
+                                      lastname: txtLastname.text,
+                                      mobile: txtMobile.text,
+                                      email: txtEmail.text,
+                                      password: txtPassword.text,
+                                    );
                               });
                         },
                       ),
