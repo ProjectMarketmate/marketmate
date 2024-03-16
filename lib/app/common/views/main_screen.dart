@@ -44,63 +44,146 @@ class _MainScreenState extends State<MainScreen> {
     return BlocBuilder<MainCubit, int>(
       builder: (context, state) {
         return Scaffold(
-            body: pages[context.read<MainCubit>().state],
-            bottomNavigationBar: NavigationBar(
-              elevation: 5,
-              backgroundColor: Colors.white,
-              onDestinationSelected: (value) {
-                context.read<MainCubit>().changeIndex(value);
-              },
-              selectedIndex: state,
-              destinations: [
-                NavigationDestination(
-                    icon: Icon(Icons.home_outlined), label: "Home"),
-                NavigationDestination(
-                    icon: Icon(Icons.explore_outlined), label: "Explore"),
-                NavigationDestination(
-                    icon: BlocListener<AddtocartCubit, AddtocartState>(
-                      listener: (context, state) {
-                       
-                       if (state is AddtocartSuccess) {
-                         context.read<CartCubit>().getCartItems();
-                       }
-                      },
-                      child: BlocBuilder<CartCubit, CartState>(
-                        builder: (context, state) {
-                          return Stack(
-                            children: [
-                              state.status == CartStatus.loading ?
-                               SizedBox(height: 10,
-                               width: 10,
-                                 child: const CircularProgressIndicator(
-                                  
-                                 ),
-                               )
-                               :Icon(Icons.shopping_cart_outlined),
-                              if (state.status == CartStatus.success &&
-                                  state.cartItems.length > 0)
-                                Positioned(
-                                  right: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 10,
-                                    height: 10,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.red,
-                                        shape: BoxShape.circle),
-                                  ),
-                                )
-                            ],
-                          );
-                        },
+  body: pages[context.read<MainCubit>().state],
+  bottomNavigationBar: Container(
+    decoration: BoxDecoration(
+      color: const Color.fromARGB(255, 223, 219, 219),
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30.0), // Adjust the radius as needed
+        topRight: Radius.circular(30.0), // Adjust the radius as needed
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.4),
+          spreadRadius: 2,
+          blurRadius: 10,
+          offset: Offset(0, 3), // Adjust the shadow position as needed
+        ),
+      ],
+    ),
+    child: NavigationBar(
+      elevation: 5,
+      backgroundColor: Colors.white,
+      onDestinationSelected: (value) {
+        context.read<MainCubit>().changeIndex(value);
+      },
+      selectedIndex: state,
+      destinations: [
+        NavigationDestination(
+          icon: Icon(Icons.home_outlined),
+          label: "Home",
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.explore_outlined),
+          label: "Explore",
+        ),
+        NavigationDestination(
+          icon: BlocListener<AddtocartCubit, AddtocartState>(
+            listener: (context, state) {
+              if (state is AddtocartSuccess) {
+                context.read<CartCubit>().getCartItems();
+              }
+            },
+            child: BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                return Stack(
+                  children: [
+                    state.status == CartStatus.loading ?
+                      SizedBox(
+                        height: 10,
+                        width: 10,
+                        child: const CircularProgressIndicator(),
+                      )
+                      : Icon(Icons.shopping_cart_outlined),
+                    if (state.status == CartStatus.success &&
+                        state.cartItems.length > 0)
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
                       ),
-                    ),
-                    label: "Cart"),
-                NavigationDestination(
-                    icon: Icon(Icons.account_circle_outlined),
-                    label: "Account"),
-              ],
-            ));
+                  ],
+                );
+              },
+            ),
+          ),
+          label: "Cart",
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.account_circle_outlined),
+          label: "Account",
+        ),
+      ],
+    ),
+  ),
+);
+        // return Scaffold(
+        //     body: pages[context.read<MainCubit>().state],
+        //     bottomNavigationBar: NavigationBar(
+        //       elevation: 5,
+              
+        //       backgroundColor: Colors.white,
+        //       onDestinationSelected: (value) {
+        //         context.read<MainCubit>().changeIndex(value);
+        //       },
+        //       selectedIndex: state,
+        //       destinations: [
+        //         NavigationDestination(
+        //             icon: Icon(Icons.home_outlined), label: "Home"),
+        //         NavigationDestination(
+        //             icon: Icon(Icons.explore_outlined), label: "Explore"),
+        //         NavigationDestination(
+        //             icon: BlocListener<AddtocartCubit, AddtocartState>(
+        //               listener: (context, state) {
+                       
+        //                if (state is AddtocartSuccess) {
+        //                  context.read<CartCubit>().getCartItems();
+        //                }
+        //               },
+        //               child: BlocBuilder<CartCubit, CartState>(
+        //                 builder: (context, state) {
+        //                   return Stack(
+        //                     children: [
+        //                       state.status == CartStatus.loading ?
+        //                        SizedBox(height: 10,
+        //                        width: 10,
+        //                          child: const CircularProgressIndicator(
+                                  
+        //                          ),
+        //                        )
+        //                        :Icon(Icons.shopping_cart_outlined),
+        //                       if (state.status == CartStatus.success &&
+        //                           state.cartItems.length > 0)
+        //                         Positioned(
+        //                           right: 0,
+        //                           top: 0,
+        //                           child: Container(
+        //                             width: 10,
+        //                             height: 10,
+        //                             decoration: const BoxDecoration(
+        //                                 color: Colors.red,
+        //                                 shape: BoxShape.circle),
+        //                           ),
+        //                         )
+        //                     ],
+        //                   );
+        //                 },
+        //               ),
+        //             ),
+        //             label: "Cart"),
+        //         NavigationDestination(
+        //             icon: Icon(Icons.account_circle_outlined),
+        //             label: "Account"),
+        //       ],
+        //     )
+        //     );
       },
     );
   }
