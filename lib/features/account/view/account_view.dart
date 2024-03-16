@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/account/view/my_details_screen.dart';
 import 'package:marketmate/features/account/widgets/account_row.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
@@ -86,7 +88,11 @@ class _AccountViewState extends State<AccountView> {
                 AccountRow(
                     title: "My Details",
                     icon: "assets/icons/My Details icon.png",
-                    onPressed: () {}),
+                    onPressed: () {
+                      context.navigatePush(MyDetailsScreen(
+                        user: user,
+                      ));
+                    }),
                 // AccountRow(
                 //     title: "Delivery",
                 //     icon: "assets/icons/Delicery address.png",
