@@ -88,7 +88,8 @@ class _ProductDetailsState extends State<ProductDetails> {
               ],
             ),
             Text(
-              "qty${widget.product.stockAvailable}",
+              // "qty${widget.product.stockAvailable}",
+             widget.product.stockAvailable! ? "Stock is available" : "Stock is not available",
               style: TextStyle(
                   color: Tcolor.secondaryText,
                   fontSize: 16,
@@ -130,7 +131,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 Expanded(
                   child: Text(
-                    "Product deatils",
+                    "Product detils",
                     style: TextStyle(
                         color: Tcolor.primaryText,
                         fontSize: 16,

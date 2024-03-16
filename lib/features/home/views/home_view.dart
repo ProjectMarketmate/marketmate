@@ -140,6 +140,19 @@ class _HomeViewState extends State<HomeView> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 20),
                       ),
+                      SizedBox(
+                        height: 230,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            itemCount: state.products.length,
+                            itemBuilder: (context, index) {
+                              return ProductCard(
+                                product: state.products[index],
+                                
+                              );
+                            }),
+                      ),
                       // SizedBox(
                       //   height: 230,
                       //   child: ListView.builder(
