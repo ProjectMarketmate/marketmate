@@ -31,10 +31,13 @@ class _AccountViewState extends State<AccountView> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            AssetImage("assets/images/useraccount.png"),
+                      Hero(
+                        tag: 'account_image',
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundImage:
+                              AssetImage("assets/images/useraccount.png"),
+                        ),
                       ),
                       SizedBox(
                         width: 10,
@@ -114,7 +117,7 @@ class _AccountViewState extends State<AccountView> {
                     icon: "assets/icons/about icon.png",
                     onPressed: () {}),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.28,
+                  height: MediaQuery.of(context).size.height * 0.27,
                 ),
                 Padding(
                   padding:

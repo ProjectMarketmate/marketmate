@@ -8,6 +8,7 @@ class LineTextField extends StatelessWidget {
   final int? maxLength;
   final Widget? right;
   final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
   final bool obscureText;
   const LineTextField(
       {super.key,
@@ -17,6 +18,7 @@ class LineTextField extends StatelessWidget {
       this.right,
       this.keyboardType,
       this.obscureText = false,
+      this.validator,
       this.maxLength});
 
   @override
@@ -30,7 +32,7 @@ class LineTextField extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: Tcolor.secondaryText)),
-        TextField(
+        TextFormField(
           controller: controller,
           keyboardType: keyboardType,
           obscureText: obscureText,
@@ -43,12 +45,13 @@ class LineTextField extends StatelessWidget {
             hintText: placeholder,
             suffixIcon: right,
           ),
+          validator: validator,
         ),
         Container(
           width: double.maxFinite,
           height: 1,
           color: Tcolor.secondaryText,
-        )
+        ),
       ],
     );
   }
