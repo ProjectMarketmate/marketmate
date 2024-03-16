@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/common/models/user.dart';
+import 'package:marketmate/app/common/widgets/line_textfield.dart';
+import 'package:marketmate/app/common/widgets/roundbutton.dart';
+import 'package:marketmate/app/utils/color_extension.dart';
 
 class MyDetailsScreen extends StatefulWidget {
   final User? user;
@@ -33,53 +36,107 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Details"),
+        title: Text("My Details",
+            style: TextStyle(color: Tcolor.primaryText, fontSize: 20)),
+        centerTitle: true,
+        elevation: 0.5,
+        backgroundColor: Colors.white,
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _firstNameController,
-              decoration: InputDecoration(labelText: 'First Name'),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your first name';
-                }
-                return null;
-              },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: 'account_image',
+                    transitionOnUserGestures: true,
+                    createRectTween: (begin, end) {
+                      return MaterialRectCenterArcTween(begin: begin, end: end);
+                    },
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          AssetImage("assets/images/useraccount.png"),
+                    ),
+                  ),
+                  LineTextField(
+                    controller: _firstNameController,
+                    placeholder: "Enter your first name",
+                    title: "First name",
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your first name';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  LineTextField(
+                    controller: _lastNameController,
+                    placeholder: "Enter your last name",
+                    title: "Last Name",
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your last name';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  LineTextField(
+                    controller: _lastNameController,
+                    placeholder: "Enter your adress",
+                    title: "Adress",
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your adress';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  LineTextField(
+                    controller: _emailController,
+                    placeholder: "Enter your email",
+                    title: "Email",
+                    validator: (value) {
+                      if (value!.isEmpty || !value.contains('@')) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  LineTextField(
+                    controller: _mobileController,
+                    placeholder: "Enter your mobile number",
+                    title: "Mobile",
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your mobile number';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.12,
+                  ),
+                  RoundButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {}
+                    },
+                    title: 'Save',
+                  )
+                ],
+              ),
             ),
-            TextFormField(
-              controller: _lastNameController,
-              decoration: InputDecoration(labelText: 'Last Name'),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your last name';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-              validator: (value) {
-                if (value!.isEmpty || !value.contains('@')) {
-                  return 'Please enter a valid email';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _mobileController,
-              decoration: InputDecoration(labelText: 'Mobile'),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your mobile number';
-                }
-                return null;
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );
