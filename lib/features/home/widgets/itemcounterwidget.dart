@@ -5,11 +5,10 @@ class ItemCounterWidget extends StatefulWidget {
   final Function(int)? onAmountChanged;
   final int initialAmount;
 
-
   const ItemCounterWidget({
-    
     Key? key,
-    this.onAmountChanged,  this.initialAmount = 1,
+    this.onAmountChanged,
+    this.initialAmount = 1,
   }) : super(key: key);
 
   @override
@@ -23,9 +22,7 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
   void initState() {
     super.initState();
     amount = widget.initialAmount;
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override

@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
+import 'package:marketmate/features/explore/models/product_category.dart';
 
 class ExploreCard extends StatelessWidget {
-  final Map pObj;
+  final ProductCategory category;
+  final Color color;
   final VoidCallback onPressed;
 
-  const ExploreCard({
+   ExploreCard({
     super.key,
-    required this.pObj,
-    required this.onPressed,
+    required this.category,
+    required this.onPressed, required this.color,
   });
 
+  
   @override
   Widget build(BuildContext context) {
-    var color = (pObj['color'] as Color? ?? Tcolor.primary);
+
     return InkWell(
       onTap: onPressed,
       borderRadius: BorderRadius.circular(15),
@@ -30,8 +33,8 @@ class ExploreCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  pObj['icon'],
+                Image.network(
+                  category.image??"",
                   width: 120,
                   height: 90,
                   fit: BoxFit.contain,
@@ -40,7 +43,7 @@ class ExploreCard extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              pObj['name'],
+             category.name??"",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Tcolor.primaryText,

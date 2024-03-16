@@ -1,64 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/explore/cubit/category/category_cubit.dart';
+import 'package:marketmate/features/explore/models/product_category.dart';
 
 import 'package:marketmate/features/home/widgets/product_card.dart';
 import 'package:marketmate/features/explore/filter_view.dart';
 
 class ExploreDetail extends StatefulWidget {
-  final Map eObj;
-  const ExploreDetail({super.key, required this.eObj});
+  final ProductCategory category;
+  const ExploreDetail({
+    super.key, required this.category,
+  });
 
   @override
   State<ExploreDetail> createState() => _ExploreDetailState();
 }
 
 class _ExploreDetailState extends State<ExploreDetail> {
-  @override
-  List listArr = [
-    {
-      "name": "Diet Coke",
-      "icon": "assets/images/beverages_images/diet_coke.png",
-      "qty": "355",
-      "unit": "ml, Price",
-      "price": "Rs.25",
-    },
-    {
-      "name": "Coca Cola",
-      "icon": "assets/images/beverages_images/coca_cola.png",
-      "qty": "325",
-      "unit": "ml, Price",
-      "price": "Rs.25",
-    },
-    {
-      "name": "Sprite",
-      "icon": "assets/images/beverages_images/sprite.png",
-      "qty": "325",
-      "unit": "ml, Price",
-      "price": "Rs.25",
-    },
-    {
-      "name": "Apple & Grape Juice",
-      "icon": "assets/images/beverages_images/apple_and_grape_juice.png",
-      "qty": "2",
-      "unit": "L, Price",
-      "price": "Rs.90",
-    },
-    {
-      "name": "Orange juice",
-      "icon": "assets/images/beverages_images/orange_juice.png",
-      "qty": "2",
-      "unit": "L, Price",
-      "price": "Rs.80",
-    },
-    {
-      "name": "Pespsi",
-      "icon": "assets/images/beverages_images/pepsi.png",
-      "qty": "325",
-      "unit": "ml, Price",
-      "price": "Rs.25",
-    },
-  ];
 
+  @override
+  void initState() {
+    context.read<CategoryCubit>().getCategoryProduct(categoryId: widget.category.id!);
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,25 +58,41 @@ class _ExploreDetailState extends State<ExploreDetail> {
                 )),
           ],
           title: Text(
-            widget.eObj['name'].toString(),
+            widget.category.name.toString(),
             style: TextStyle(
                 color: Tcolor.primaryText,
                 fontSize: 20,
                 fontWeight: FontWeight.w700),
           ),
         ),
-        body: GridView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15),
-            itemCount: listArr.length,
-            itemBuilder: (context, index) {
-              var pObj = listArr[index] as Map? ?? {};
+        body: BlocConsumer<CategoryCubit, CategoryState>(
+          listener: (context, state) {
+              if (state is CategoryFailed) {
+                context.showErrorMessage(state.error);
+              }
+          },
+          builder: (context, state) {
+            if (state is CategorySuccess) {
+              return GridView.builder(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.75,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15),
+                itemCount: state.products.length,
+                itemBuilder: (context, index) {
 
-              //  return ProductCard(pObj: pObj, onPressed: (){}, onCart: (){},margin: 0,weight: double.maxFinite,);
-            }));
+
+                   return ProductCard(product: state.products[index],);
+                });
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+            
+          },
+        ));
   }
 }

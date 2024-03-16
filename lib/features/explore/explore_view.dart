@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/explore_card.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
 import 'package:marketmate/features/explore/exploredetail_view.dart';
 import 'package:marketmate/features/explore/search_view.dart';
 import 'package:marketmate/features/home/views/Product_details_view.dart';
@@ -9,46 +12,27 @@ class ExploreView extends StatefulWidget {
   const ExploreView({super.key});
 
   @override
-  State<ExploreView> createState() => _HomeViewState();
+  State<ExploreView> createState() => _ExploreViewState();
 }
 
-class _HomeViewState extends State<ExploreView> {
+class _ExploreViewState extends State<ExploreView> {
   @override
   TextEditingController txtSearch = TextEditingController();
 
-  List findProductsArr = [
-    {
-      "name": "Fresh Fruits & Vegetables",
-      "icon": "assets/images/categories_images/fruit.png",
-      "color": const Color(0xff53B175),
-    },
-    {
-      "name": "Cooking oil & Ghee",
-      "icon": "assets/images/categories_images/oil.png",
-      "color": const Color(0xffF8A44C),
-    },
-    {
-      "name": "Bakery & Snacks",
-      "icon": "assets/images/categories_images/bakery.png",
-      "color": const Color(0xffF7A593),
-    },
-    {
-      "name": "Meat & Fish",
-      "icon": "assets/images/categories_images/meat.png",
-      "color": const Color(0xffD3B0E0),
-    },
-    {
-      "name": "Dairy & Eggs",
-      "icon": "assets/images/categories_images/dairy.png",
-      "color": const Color(0xffFA8072),
-    },
-    {
-      "name": "Beverages",
-      "icon": "assets/images/categories_images/beverages.png",
-      "color": const Color(0xffF6D365),
-    },
-  ];
+  @override
+  void initState() {
+    context.read<ExploreCubit>().getAllCategories();
+    super.initState();
+  }
 
+  final List<Color> colors=[
+    Colors.green,
+    Colors.teal,
+    Colors.blue,
+    Colors.purple,
+    Colors.pink,
+    Colors.amber,
+  ];
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context);
@@ -122,28 +106,51 @@ class _HomeViewState extends State<ExploreView> {
           //   ],
           // ),
 
-          Expanded(
-            child: GridView.builder(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.95,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 15),
-                itemCount: findProductsArr.length,
-                itemBuilder: (context, index) {
-                  var pObj = findProductsArr[index] as Map? ?? {};
-                  return ExploreCard(
-                      pObj: pObj,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ExploreDetail(eObj: pObj)));
-                      });
-                }),
+          BlocConsumer<ExploreCubit, ExploreState>(
+            listener: (context, state) {
+             if(state is ExploreFailed){
+                context.showErrorMessage(
+                  state.error
+                );
+             }
+            
+
+
+            },
+            builder: (context, state) {
+              if (state is ExploreSuccess) {
+                  return Expanded(
+                child: GridView.builder(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.95,
+                            crossAxisSpacing: 15,
+                            mainAxisSpacing: 15),
+                    itemCount: state.categories.length,
+                    itemBuilder: (context, index) {
+
+                        final color  = colors[index%colors.length];
+                      return ExploreCard(
+                        color: color,
+                            category: state.categories[index],
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ExploreDetail(category: state.categories[index],)));
+                          });
+                    }),
+              );
+              }
+            
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+            },
           )
         ],
       ),

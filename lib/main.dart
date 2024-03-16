@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:marketmate/app/common/cubit/main_cubit.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
 import 'package:marketmate/features/auth/cubit/signup/signup_cubit.dart';
 
 import 'package:marketmate/app/common/views/splash_view.dart';
+import 'package:marketmate/features/cart/cubit/addtocart/addtocart_cubit.dart';
 import 'package:marketmate/features/cart/cubit/cart_cubit.dart';
+import 'package:marketmate/features/cart/cubit/deletefromcart/deletefromcart_cubit.dart';
+import 'package:marketmate/features/explore/cubit/category/category_cubit.dart';
+import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
+
 import 'package:marketmate/features/home/cubit/cubit/productdetail_cubit.dart';
 
 import 'package:marketmate/features/home/cubit/home_view_cubit.dart';
@@ -30,6 +36,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => SignupCubit()),
         BlocProvider(create: (ctx) => ProductdetailCubit()),
         BlocProvider(create: (ctx) => CartCubit()),
+        BlocProvider(create: (ctx) => MainCubit()),
+        BlocProvider(create: (ctx) => AddtocartCubit()),
+        BlocProvider(create: (ctx) => ExploreCubit()),
+        BlocProvider(create: (ctx) => CategoryCubit()),
       ],
       child: MaterialApp(
           title: 'Online Groceries',

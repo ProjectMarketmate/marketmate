@@ -30,16 +30,14 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  void removeProductFromList({required int productId}){
+  void removeProductFromList({required int productId}) {
     print(productId);
     emit(state.copyWith(status: CartStatus.loading));
-    emit(state.copyWith(
-      cartItems: [...state.cartItems
+    emit(state.copyWith(cartItems: [
+      ...state.cartItems
           .where((element) => element.product?.id != productId)
-          .toList(),],
-      status: CartStatus.success
-    ));
- 
+          .toList(),
+    ], status: CartStatus.success));
   }
 
   void removeProduct({required int id}) async {

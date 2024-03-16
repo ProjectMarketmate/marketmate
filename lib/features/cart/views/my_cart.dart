@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
+import 'package:marketmate/features/cart/cubit/deletefromcart/deletefromcart_cubit.dart';
+import 'package:marketmate/features/cart/cubit/updatecart/updatecart_cubit.dart';
+import 'package:marketmate/features/cart/models/cart_item.dart';
 import 'package:marketmate/features/cart/widgets/cart_item_row.dart';
 import 'package:marketmate/features/cart/cubit/cart_cubit.dart';
 import 'package:marketmate/features/cart/views/checkout_view.dart';
 
+final totalPrice = ValueNotifier(0.0);
 class MyCart extends StatefulWidget {
   const MyCart({super.key});
 
@@ -17,6 +21,15 @@ class _MyCartState extends State<MyCart> {
   void initState() {
     context.read<CartCubit>().getCartItems();
     super.initState();
+  }
+
+  void calculateTotalPrice(List<CartItem> items){
+
+    double total = 0;
+    for(var item in items){
+      total += double.parse(item.product!.mrp!) * item.quantity!;
+    }
+    totalPrice.value = total;
   }
 
   @override
@@ -46,7 +59,7 @@ class _MyCartState extends State<MyCart> {
               alignment: Alignment.bottomCenter,
               children: [
                 ListView.separated(
-                  key: UniqueKey(),
+                    key: UniqueKey(),
                     padding: const EdgeInsets.all(20),
                     separatorBuilder: (context, index) => const Divider(
                           color: Colors.black26,
@@ -55,9 +68,27 @@ class _MyCartState extends State<MyCart> {
                     itemCount: state.cartItems.length,
                     itemBuilder: (context, index) {
                       var pObj = state.cartItems[index];
-                      return CartItemRow(
+                      return MultiBlocProvider(
                         key: ValueKey(pObj.id!),
-                        item: pObj,
+                        providers: [
+                          BlocProvider<DeletefromcartCubit>(
+
+                            create: (context) => DeletefromcartCubit(),
+                          ),
+                          BlocProvider<UpdatecartCubit>(
+
+                            create: (context) => UpdatecartCubit(),
+                          ),
+                        ],
+                        child: CartItemRow(
+
+                          item: pObj,
+                          onCountUpdate: (){
+                            calculateTotalPrice(
+                              state.cartItems
+                            );
+                          },
+                        ),
                       );
                     }),
 
@@ -103,12 +134,18 @@ class _MyCartState extends State<MyCart> {
                                     vertical: 4, horizontal: 8),
 
                                 //inside round button price tag
-                                child: Text(
-                                  "Rs.0",
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500),
+                                child: ValueListenableBuilder(
+                                  valueListenable: totalPrice,
+                                  builder: (context,value,child) {
+                                    calculateTotalPrice(state.cartItems);
+                                    return Text(
+                                      totalPrice.value.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    );
+                                  }
                                 ))
                           ],
                         ),

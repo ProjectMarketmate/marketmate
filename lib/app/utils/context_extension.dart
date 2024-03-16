@@ -15,6 +15,8 @@ extension ContextExt on BuildContext {
   }
 
   void showMessage(String message) {
+    //close all snackbars
+    ScaffoldMessenger.of(this).clearSnackBars();
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(message),
