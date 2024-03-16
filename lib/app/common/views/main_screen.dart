@@ -5,7 +5,7 @@ import 'package:marketmate/features/account/view/account_view.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/features/cart/cubit/addtocart/addtocart_cubit.dart';
 import 'package:marketmate/features/cart/cubit/cart_cubit.dart';
-import 'package:marketmate/features/explore/explore_view.dart';
+import 'package:marketmate/features/explore/view/explore_view.dart';
 
 import 'package:marketmate/features/cart/views/my_cart.dart';
 import 'package:marketmate/features/home/views/home_view.dart';
