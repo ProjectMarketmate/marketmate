@@ -46,6 +46,7 @@ class _MainScreenState extends State<MainScreen> {
         return Scaffold(
             body: pages[context.read<MainCubit>().state],
             bottomNavigationBar: NavigationBar(
+              elevation: 5,
               backgroundColor: Colors.white,
               onDestinationSelected: (value) {
                 context.read<MainCubit>().changeIndex(value);
