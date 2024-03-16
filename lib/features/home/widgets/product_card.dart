@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/cart/cubit/addtocart/addtocart_cubit.dart';
+import 'package:marketmate/features/cart/cubit/cart_cubit.dart';
 import 'package:marketmate/features/home/views/Product_details_view.dart';
 
-import '../../common/models/products.dart';
+import '../../../app/common/models/products.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -56,9 +60,9 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Hero(
-                    tag: product.id,
+                    tag: product.id!,
                     child: Image.network(
-                      product.thumbnail,
+                      product.thumbnail ?? "",
                       width: 100,
                       height: 80,
                       fit: BoxFit.contain,
@@ -67,7 +71,7 @@ class ProductCard extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              product.name,
+              product.name ?? "",
               style: TextStyle(
                   color: Tcolor.primaryText,
                   fontSize: 16,
@@ -88,7 +92,13 @@ class ProductCard extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context
+                        .read<AddtocartCubit>()
+                        .addtocart(productId: product.id!, quantity: 1);
+                    context.showMessage("Added to cart");
+                    
+                  },
                   child: Container(
                     width: 40,
                     height: 40,

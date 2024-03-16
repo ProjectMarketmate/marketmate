@@ -6,20 +6,36 @@ class SectionView extends StatelessWidget {
   final bool isShowSeeAllButton;
   final VoidCallback onPressed;
   final EdgeInsets? padding;
-  const SectionView({super.key, required this.title, this.isShowSeeAllButton=true, required this.onPressed, this.padding});
+  const SectionView(
+      {super.key,
+      required this.title,
+      this.isShowSeeAllButton = true,
+      required this.onPressed,
+      this.padding});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ,
+      padding: padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-            Text(title,style: TextStyle(color: Tcolor.darkGrey,fontSize: 20,fontWeight: FontWeight.w600),),
-
-            TextButton(onPressed: onPressed, child: Text("See all",style: TextStyle(color: Tcolor.primary,fontSize: 16,fontWeight: FontWeight.w600),)),
-
-
+          Text(
+            title,
+            style: TextStyle(
+                color: Tcolor.darkGrey,
+                fontSize: 20,
+                fontWeight: FontWeight.w600),
+          ),
+          TextButton(
+              onPressed: onPressed,
+              child: Text(
+                "See all",
+                style: TextStyle(
+                    color: Tcolor.primary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              )),
         ],
       ),
     );

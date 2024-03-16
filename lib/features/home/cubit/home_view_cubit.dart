@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:marketmate/app/utils/dio_client.dart';
-import 'package:marketmate/features/common/models/products.dart';
+import 'package:marketmate/app/common/models/products.dart';
 
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,6 +27,8 @@ class HomeViewCubit extends Cubit<HomeViewState> {
       emit(HomeViewSuccess(
           products:
               (resp.data as List).map((e) => Product.fromJson(e)).toList()));
+    } on DioException catch (e) {
+      print(e.response?.data.toString());
     } catch (e) {
       emit(HomeViewFailed(error: e.toString()));
     }

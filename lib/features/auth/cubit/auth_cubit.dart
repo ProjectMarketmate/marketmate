@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/dio_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../common/models/user.dart';
+import '../../../app/common/models/user.dart';
 
 part 'auth_state.dart';
 
@@ -24,7 +24,6 @@ class AuthCubit extends Cubit<AuthState> {
         "email": email,
         "password": password,
       });
-
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', resp.data['token']);
       emit(AuthSuccess(user: User.fromJson(resp.data)));
@@ -34,5 +33,23 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(AuthFailed(error: e.toString()));
     }
+  }
+
+  void loadUser() async {
+    emit(AuthLoading());
+    try {
+      final resp = await dioClient.get('/account/profile/');
+
+      emit(AuthSuccess(user: User.fromJson(resp.data)));
+    } catch (e) {
+      logout();
+    }
+  }
+
+  void logout() async {
+    emit(AuthInitial());
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
   }
 }

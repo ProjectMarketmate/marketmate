@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
-
 class ItemCounterWidget extends StatefulWidget {
-  final Function? onAmountChanged;
+  final Function(int)? onAmountChanged;
+  final int initialAmount;
 
-
-  const ItemCounterWidget({Key? key, this.onAmountChanged,   }) : super(key: key);
-
-
+  const ItemCounterWidget({
+    Key? key,
+    this.onAmountChanged,
+    this.initialAmount = 1,
+  }) : super(key: key);
 
   @override
   _ItemCounterWidgetState createState() => _ItemCounterWidgetState();
@@ -20,7 +21,8 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
   @override
   void initState() {
     super.initState();
-    amount = 1;
+    amount = widget.initialAmount;
+    setState(() {});
   }
 
   @override
@@ -48,7 +50,8 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
       updateParent();
     });
   }
-   void DecrementAmount() {
+
+  void DecrementAmount() {
     setState(() {
       amount = amount - 1;
       updateParent();
@@ -60,7 +63,7 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
 
   //     if (widget.cartItem == null) {
   //       return;
-        
+
   //     }
   //     cartItems.value.removeWhere((element) => element.key == widget.cartItem?.key);
   //     cartItems.notifyListeners();
@@ -121,5 +124,3 @@ class _ItemCounterWidgetState extends State<ItemCounterWidget> {
     );
   }
 }
-
-

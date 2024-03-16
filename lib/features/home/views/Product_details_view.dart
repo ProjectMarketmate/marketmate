@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:marketmate/app/common/cubit/main_cubit.dart';
+import 'package:marketmate/app/common/views/main_screen.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
-import 'package:marketmate/common_widgets/app_text.dart';
-import 'package:marketmate/common_widgets/roundbutton.dart';
+import 'package:marketmate/app/common/widgets/app_text.dart';
+import 'package:marketmate/app/common/widgets/roundbutton.dart';
+import 'package:marketmate/app/utils/common_utils.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/cart/cubit/addtocart/addtocart_cubit.dart';
+
 import 'package:marketmate/features/home/widgets/itemcounterwidget.dart';
 
-import '../../common/models/products.dart';
+import '../../../app/common/models/products.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.product});
@@ -36,8 +43,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 color: Color(0xffF2F3F2),
                 borderRadius: BorderRadius.circular(15)),
             child: Hero(
-                tag: widget.product.id,
-                child: Image.network(widget.product.thumbnail)),
+                tag: widget.product.id!,
+                child: Image.network(widget.product.thumbnail ?? "")),
           ),
           SafeArea(
             child: AppBar(
@@ -65,7 +72,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.product.name,
+                    widget.product.name ?? "",
                     style: TextStyle(
                         color: Tcolor.primaryText,
                         fontSize: 24,
@@ -92,7 +99,13 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             Row(
               children: [
-                ItemCounterWidget(),
+                ItemCounterWidget(
+                  onAmountChanged: (p0) {
+                    setState(() {
+                      amount = p0;
+                    });
+                  },
+                ),
                 Spacer(),
                 Text(
                   "Rs.${widget.product.mrp}",
@@ -235,7 +248,31 @@ class _ProductDetailsState extends State<ProductDetails> {
             const SizedBox(
               height: 8,
             ),
-            RoundButton(title: "Add To Basket", onPressed: () {}),
+            BlocConsumer<AddtocartCubit, AddtocartState>(
+              listener: (context, state) {
+                if (state is AddtocartFailed) {
+                  context.showMessage(state.error);
+                }
+                if (state is AddtocartSuccess) {
+                  context.showMessage("Added to cart");
+                  context.navigateReplaceAll(MainScreen());
+                  context.read<MainCubit>().changeIndex(2);
+                }
+              },
+              builder: (context, state) {
+                if (state is AddtocartLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return RoundButton(
+                    title: "Add To Basket",
+                    onPressed: () {
+                      context.read<AddtocartCubit>().addtocart(
+                          productId: widget.product.id!, quantity: amount);
+                    });
+              },
+            ),
           ],
         ),
       )
@@ -388,24 +425,6 @@ Widget ratingWidget() {
   );
 }
 
+//        Scaffold(backgroundColor: Colors.white,
 
-
-
-
-
-    //        Scaffold(backgroundColor: Colors.white,
-            
-      
-    
-    //////////////////////////////////
-              
-      
-
-              
-              
-              
-
-
-                
-                
-               
+//////////////////////////////////
