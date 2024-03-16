@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
-import 'package:marketmate/app/common/widgets/explore_card.dart';
+import 'package:marketmate/features/explore/widget/explore_card.dart';
 import 'package:marketmate/app/utils/context_extension.dart';
 import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
-import 'package:marketmate/features/explore/exploredetail_view.dart';
-import 'package:marketmate/features/explore/search_view.dart';
+import 'package:marketmate/features/explore/view/exploredetail_view.dart';
+import 'package:marketmate/features/explore/view/search_view.dart';
 import 'package:marketmate/features/home/views/Product_details_view.dart';
 
 class ExploreView extends StatefulWidget {
@@ -97,14 +97,7 @@ class _ExploreViewState extends State<ExploreView> {
               ),
             ),
           ),
-          // Row(
-          //   children: [
-          //       Padding(padding: EdgeInsets.all(13),
-          //       child:Icon(Icons.search,color: Tcolor.primary,size: 35,) ,),
-          //        Text("Search Srore",style: TextStyle(color: Tcolor.secondaryText,fontSize: 14,fontWeight: FontWeight.w600),),
-
-          //   ],
-          // ),
+       
 
           BlocConsumer<ExploreCubit, ExploreState>(
             listener: (context, state) {

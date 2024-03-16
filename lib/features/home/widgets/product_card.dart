@@ -45,7 +45,7 @@ class ProductCard extends StatelessWidget {
         );
       },
       child: Container(
-        width: 180,
+        width: 190,
         margin: EdgeInsets.symmetric(horizontal: 8),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -71,50 +71,103 @@ class ProductCard extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              product.name ?? "",
-              style: TextStyle(
-                  color: Tcolor.primaryText,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700),
-            ),
+  product.name ?? "",
+  style: TextStyle(
+    color: Tcolor.primaryText,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  ),
+  maxLines: 2, // Limiting to 2 lines, adjust as needed
+  overflow: TextOverflow.ellipsis, // Truncate with ellipsis if overflow
+),
+            // Text(
+            //   product.name ?? "",
+            //   style: TextStyle(
+            //       color: Tcolor.primaryText,
+            //       fontSize: 16,
+            //       fontWeight: FontWeight.w700),
+            // ),
             const SizedBox(
               height: 2,
             ),
             const Spacer(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Rs.${product.mrp}",
-                  style: TextStyle(
-                      color: Tcolor.primaryText,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-                InkWell(
-                  onTap: () {
-                    context
-                        .read<AddtocartCubit>()
-                        .addtocart(productId: product.id!, quantity: 1);
-                    context.showMessage("Added to cart");
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    Expanded(
+      // Wrap with Expanded to allow the text to take available space
+      child: Text(
+        "Rs.${product.mrp}",
+        style: TextStyle(
+          color: Tcolor.primaryText,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+        overflow: TextOverflow.fade, // Handle overflow with ellipsis if necessary
+      ),
+    ),
+    InkWell(
+      onTap: () {
+        context
+            .read<AddtocartCubit>()
+            .addtocart(productId: product.id!, quantity: 1);
+        context.showMessage("Added to cart");
+      },
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Tcolor.primary,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        alignment: Alignment.center,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
+      ),
+    )
+  ],
+)
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              
+            //   children: [
+            //     Text(
+            //       "Rs.${product.mrp}",
+            //       style: TextStyle(
+            //           color: Tcolor.primaryText,
+            //           fontSize: 18,
+            //           fontWeight: FontWeight.w600),
+            //           overflow: TextOverflow.ellipsis,
+                      
+            //     ),
+               
+            //     InkWell(
+            //       onTap: () {
+            //         context
+            //             .read<AddtocartCubit>()
+            //             .addtocart(productId: product.id!, quantity: 1);
+            //         context.showMessage("Added to cart");
                     
-                  },
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Tcolor.primary,
-                        borderRadius: BorderRadius.circular(15)),
-                    alignment: Alignment.center,
-                    child: const Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
-                )
-              ],
-            )
+            //       },
+            //       child: Container(
+            //         width: 40,
+            //         height: 40,
+            //         decoration: BoxDecoration(
+            //             color: Tcolor.primary,
+            //             borderRadius: BorderRadius.circular(15)),
+            //         alignment: Alignment.center,
+            //         child: const Icon(
+            //           Icons.add,
+            //           color: Colors.white,
+            //           size: 30,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // )
           ],
         ),
       ),

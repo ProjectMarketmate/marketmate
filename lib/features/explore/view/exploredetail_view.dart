@@ -6,7 +6,7 @@ import 'package:marketmate/features/explore/cubit/category/category_cubit.dart';
 import 'package:marketmate/features/explore/models/product_category.dart';
 
 import 'package:marketmate/features/home/widgets/product_card.dart';
-import 'package:marketmate/features/explore/filter_view.dart';
+import 'package:marketmate/features/explore/view/filter_view.dart';
 
 class ExploreDetail extends StatefulWidget {
   final ProductCategory category;
@@ -79,8 +79,8 @@ class _ExploreDetailState extends State<ExploreDetail> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.75,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 15),
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 10),
                 itemCount: state.products.length,
                 itemBuilder: (context, index) {
 
