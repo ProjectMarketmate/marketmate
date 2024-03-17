@@ -8,6 +8,7 @@ class User {
     required this.mobile,
     required this.image,
     required this.token,
+    required this.address,
   });
 
   final int id;
@@ -16,10 +17,12 @@ class User {
   final String email;
   final bool isAdmin;
   final String mobile;
+  final String address;
   final String image;
   final String token;
 
   factory User.fromJson(Map<String, dynamic> json) {
+    print(json);
     return User(
       id: json["id"],
       firstName: json["first_name"],
@@ -27,6 +30,7 @@ class User {
       email: json["email"],
       isAdmin: json["is_admin"],
       mobile: json["mobile"],
+      address: json["address"],
       image: json["image"],
       token: json["token"],
     );
