@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/context_extension.dart';
 import 'package:marketmate/features/account/view/my_details_screen.dart';
+import 'package:marketmate/features/account/view/orders_screen.dart';
 import 'package:marketmate/features/account/widgets/account_row.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
 import 'package:marketmate/features/auth/views/login_view.dart';
-import 'package:marketmate/features/cart/views/checkout_view.dart';
 
 class AccountView extends StatefulWidget {
   const AccountView({super.key});
@@ -89,13 +89,25 @@ class _AccountViewState extends State<AccountView> {
                 //     icon: "assets/icons/Orders icon.png",
                 //     onPressed: () {}),
                 AccountRow(
-                    title: "My Details",
-                    icon: "assets/icons/My Details icon.png",
-                    onPressed: () {
-                      context.navigatePush(MyDetailsScreen(
+                  title: "My Details",
+                  icon: "assets/icons/My Details icon.png",
+                  onPressed: () {
+                    context.navigatePush(
+                      MyDetailsScreen(
                         user: user,
-                      ));
-                    }),
+                      ),
+                    );
+                  },
+                ),
+                AccountRow(
+                  title: "Orders",
+                  icon: "assets/icons/Orders icon.png",
+                  onPressed: () {
+                    context.navigatePush(
+                      OrdersScreen(),
+                    );
+                  },
+                ),
                 // AccountRow(
                 //     title: "Delivery",
                 //     icon: "assets/icons/Delicery address.png",
@@ -108,20 +120,15 @@ class _AccountViewState extends State<AccountView> {
                     title: "Notifications",
                     icon: "assets/icons/Bell icon.png",
                     onPressed: () {}),
+
                 AccountRow(
                     title: "Help",
                     icon: "assets/icons/help icon.png",
                     onPressed: () {}),
-                AccountRow(
-                    title: "About",
-                    icon: "assets/icons/about icon.png",
-                    onPressed: () {}),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.27,
-                ),
+
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Column(
                     children: [
                       MaterialButton(

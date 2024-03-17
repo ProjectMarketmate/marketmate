@@ -19,6 +19,7 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _addressController = TextEditingController();
   final _mobileController = TextEditingController();
 
   @override
@@ -29,6 +30,7 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
       _lastNameController.text = widget.user!.lastName;
       _emailController.text = widget.user!.email;
       _mobileController.text = widget.user!.mobile;
+      _addressController.text = widget.user!.address;
     }
   }
 
@@ -90,7 +92,7 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
                   ),
                   SizedBox(height: 10),
                   LineTextField(
-                    controller: _lastNameController,
+                    controller: _addressController,
                     placeholder: "Enter your adress",
                     title: "Adress",
                     validator: (value) {
@@ -125,7 +127,7 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
                     },
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.12,
+                    height: 20,
                   ),
                   RoundButton(
                     onPressed: () {
