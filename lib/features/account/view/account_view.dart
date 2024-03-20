@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/context_extension.dart';
 import 'package:marketmate/features/account/view/my_details_screen.dart';
+import 'package:marketmate/features/account/view/notification_screen.dart';
 import 'package:marketmate/features/account/view/orders_screen.dart';
 import 'package:marketmate/features/account/widgets/account_row.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
@@ -119,7 +120,11 @@ class _AccountViewState extends State<AccountView> {
                 AccountRow(
                     title: "Notifications",
                     icon: "assets/icons/Bell icon.png",
-                    onPressed: () {}),
+                    onPressed: () {
+                      context.navigatePush(
+                        NotificationScreen(),
+                      );
+                    }),
 
                 AccountRow(
                     title: "Help",
