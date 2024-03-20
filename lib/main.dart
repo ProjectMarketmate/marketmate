@@ -13,8 +13,6 @@ import 'package:marketmate/features/explore/cubit/category/category_cubit.dart';
 import 'package:marketmate/features/explore/cubit/cubit/searchcubit_cubit.dart';
 import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
 
-
-
 import 'package:marketmate/features/home/cubit/home_view_cubit.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';

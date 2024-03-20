@@ -8,15 +8,11 @@ part 'category_state.dart';
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit() : super(CategoryInitial());
 
-  void getCategoryProduct({
-    required int categoryId
-  })async {
+  void getCategoryProduct({required int categoryId}) async {
     emit(CategoryLoading());
     try {
-      final resp = await dioClient.get("app/products/",
-      queryParameters: {
-        "category": categoryId
-      });
+      final resp = await dioClient
+          .get("app/products/", queryParameters: {"category": categoryId});
       final List<Product> products = [
         for (var item in resp.data) Product.fromJson(item)
       ];

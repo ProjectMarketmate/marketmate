@@ -7,7 +7,6 @@ import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
 import 'package:marketmate/features/explore/view/exploredetail_view.dart';
 import 'package:marketmate/features/explore/view/search_view.dart';
 
-
 class ExploreView extends StatefulWidget {
   const ExploreView({super.key});
 
@@ -25,7 +24,7 @@ class _ExploreViewState extends State<ExploreView> {
     super.initState();
   }
 
-  final List<Color> colors=[
+  final List<Color> colors = [
     Colors.green,
     Colors.teal,
     Colors.blue,
@@ -57,9 +56,9 @@ class _ExploreViewState extends State<ExploreView> {
             height: 10,
           ),
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 context.navigatePush(SearchView());
               },
               child: Container(
@@ -70,7 +69,6 @@ class _ExploreViewState extends State<ExploreView> {
                 alignment: Alignment.center,
                 child: TextField(
                   controller: txtSearch,
-                 
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
                     enabledBorder: InputBorder.none,
@@ -93,52 +91,45 @@ class _ExploreViewState extends State<ExploreView> {
               ),
             ),
           ),
-       
-
           BlocConsumer<ExploreCubit, ExploreState>(
             listener: (context, state) {
-             if(state is ExploreFailed){
-                context.showErrorMessage(
-                  state.error
-                );
-             }
-            
-
-
+              if (state is ExploreFailed) {
+                context.showErrorMessage(state.error);
+              }
             },
             builder: (context, state) {
               if (state is ExploreSuccess) {
-                  return Expanded(
-                child: GridView.builder(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.95,
-                            crossAxisSpacing: 15,
-                            mainAxisSpacing: 15),
-                    itemCount: state.categories.length,
-                    itemBuilder: (context, index) {
-
-                        final color  = colors[index%colors.length];
-                      return ExploreCard(
-                        color: color,
+                return Expanded(
+                  child: GridView.builder(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 0.95,
+                              crossAxisSpacing: 15,
+                              mainAxisSpacing: 15),
+                      itemCount: state.categories.length,
+                      itemBuilder: (context, index) {
+                        final color = colors[index % colors.length];
+                        return ExploreCard(
+                            color: color,
                             category: state.categories[index],
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ExploreDetail(category: state.categories[index],)));
-                          });
-                    }),
-              );
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ExploreDetail(
+                                            category: state.categories[index],
+                                          )));
+                            });
+                      }),
+                );
               }
-            
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             },
           )
         ],

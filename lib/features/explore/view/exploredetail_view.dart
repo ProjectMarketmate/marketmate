@@ -11,7 +11,8 @@ import 'package:marketmate/features/explore/view/filter_view.dart';
 class ExploreDetail extends StatefulWidget {
   final ProductCategory category;
   const ExploreDetail({
-    super.key, required this.category,
+    super.key,
+    required this.category,
   });
 
   @override
@@ -19,13 +20,15 @@ class ExploreDetail extends StatefulWidget {
 }
 
 class _ExploreDetailState extends State<ExploreDetail> {
-
   @override
   void initState() {
-    context.read<CategoryCubit>().getCategoryProduct(categoryId: widget.category.id!);
+    context
+        .read<CategoryCubit>()
+        .getCategoryProduct(categoryId: widget.category.id!);
 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,31 +70,30 @@ class _ExploreDetailState extends State<ExploreDetail> {
         ),
         body: BlocConsumer<CategoryCubit, CategoryState>(
           listener: (context, state) {
-              if (state is CategoryFailed) {
-                context.showErrorMessage(state.error);
-              }
+            if (state is CategoryFailed) {
+              context.showErrorMessage(state.error);
+            }
           },
           builder: (context, state) {
             if (state is CategorySuccess) {
               return GridView.builder(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.75,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 10),
-                itemCount: state.products.length,
-                itemBuilder: (context, index) {
-
-
-                   return ProductCard(product: state.products[index],);
-                });
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.75,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 10),
+                  itemCount: state.products.length,
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                      product: state.products[index],
+                    );
+                  });
             }
             return Center(
               child: CircularProgressIndicator(),
             );
-            
           },
         ));
   }

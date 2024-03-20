@@ -149,7 +149,6 @@ class _HomeViewState extends State<HomeView> {
                             itemBuilder: (context, index) {
                               return ProductCard(
                                 product: state.products[index],
-                                
                               );
                             }),
                       ),

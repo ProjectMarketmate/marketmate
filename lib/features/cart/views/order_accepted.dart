@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketmate/app/common/cubit/main_cubit.dart';
+import 'package:marketmate/app/common/views/main_screen.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
 import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/account/view/orders_screen.dart';
 import 'package:marketmate/features/home/views/home_view.dart';
 
 class OrderAcceptView extends StatefulWidget {
@@ -63,10 +67,13 @@ class _OrderAcceptViewState extends State<OrderAcceptView> {
                     ),
                     Spacer(),
                     Spacer(),
-                    RoundButton(title: "Track Order", onPressed: () {}),
+                    RoundButton(title: "Track Order", onPressed: () {
+                      context.navigateReplace(OrdersScreen());
+                    }),
                     TextButton(
                         onPressed: () {
-                         context.navigateReplaceAll(const HomeView());
+                          context.navigateReplaceAll(const MainScreen());
+                          context.read<MainCubit>().changeIndex(0);
                         },
                         child: Text(
                           "Back to Home",

@@ -1,10 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/app/utils/dio_client.dart';
+import 'package:marketmate/features/cart/cubit/cart_cubit.dart';
 import 'package:marketmate/features/cart/views/my_cart.dart';
 import 'package:marketmate/features/cart/views/order_accepted.dart';
-import 'package:marketmate/features/cart/views/order_failed.dart';
+import 'package:marketmate/features/cart/views/order_failed_view.dart';
 import 'package:marketmate/features/cart/widgets/checkout_item_row.dart';
 
 class CheckoutView extends StatefulWidget {
@@ -15,6 +19,7 @@ class CheckoutView extends StatefulWidget {
 }
 
 class _CheckoutViewState extends State<CheckoutView> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +63,6 @@ class _CheckoutViewState extends State<CheckoutView> {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              
               Divider(
                 color: Colors.black26,
                 height: 1,
@@ -74,7 +78,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                               backgroundColor: Colors.transparent,
                               insetPadding:
                                   EdgeInsets.symmetric(horizontal: 20),
-                              child: OrderFailed());
+                              child: OrderFailedView());
                         });
                   }),
               Padding(
@@ -113,13 +117,30 @@ class _CheckoutViewState extends State<CheckoutView> {
               ),
             ],
           ),
-          RoundButton(
-            title: "Place Order",
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => OrderAcceptView()));
-            },
-          ),
+          isLoading
+              ? CircularProgressIndicator()
+              : RoundButton(
+                  title: "Place Order",
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    try {
+                      final resp = await dioClient.post('/app/order/create/');
+                      context.pop();
+                      context.navigatePush(OrderAcceptView());
+                      context.read<CartCubit>().getCartItems();
+                    } catch (e) {
+                      context.pop();
+                      print(e);
+                      context.showErrorMessage("Something went wrong");
+                    } finally {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  },
+                ),
         ],
       ),
     );

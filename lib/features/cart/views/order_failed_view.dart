@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
 
-class OrderFailed extends StatelessWidget {
-  const OrderFailed({super.key});
+class OrderFailedView extends StatelessWidget {
+  const OrderFailedView({super.key});
 
   @override
   Widget build(BuildContext context) {

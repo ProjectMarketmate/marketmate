@@ -16,7 +16,6 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   TextEditingController txtSearch = TextEditingController();
- 
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class _SearchViewState extends State<SearchView> {
               alignment: Alignment.center,
               child: TextField(
                 controller: txtSearch,
-                onChanged: (value){
+                onChanged: (value) {
                   context.read<SearchcubitCubit>().searchProducts(value);
                 },
                 decoration: InputDecoration(
@@ -71,33 +70,35 @@ class _SearchViewState extends State<SearchView> {
             ),
             Expanded(
               child: BlocConsumer<SearchcubitCubit, SearchcubitState>(
-                            listener: (context, state) {
-              if (state is SearchcubitFailed) {
-                context.showErrorMessage(state.error);
-              }
-                            },
-                            builder: (context, state) {
-                                        if (state is SearchcubitSuccess) {
-                return GridView.builder(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15,),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.75,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 10),
-                  itemCount: state.productList.length,
-                  itemBuilder: (context, index) {
-              
-              
-                     return ProductCard(product: state.productList[index],);
-                  });
-              }
-                             return Center(
-              child: CircularProgressIndicator(),
-                             );
-                            },
-                          ),
+                listener: (context, state) {
+                  if (state is SearchcubitFailed) {
+                    context.showErrorMessage(state.error);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is SearchcubitSuccess) {
+                    return GridView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15,
+                        ),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.75,
+                                crossAxisSpacing: 8,
+                                mainAxisSpacing: 10),
+                        itemCount: state.productList.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            product: state.productList[index],
+                          );
+                        });
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
             )
           ],
         ),

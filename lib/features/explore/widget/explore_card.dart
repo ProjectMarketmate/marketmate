@@ -7,16 +7,15 @@ class ExploreCard extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
 
-   ExploreCard({
+  ExploreCard({
     super.key,
     required this.category,
-    required this.onPressed, required this.color,
+    required this.onPressed,
+    required this.color,
   });
 
-  
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: onPressed,
       borderRadius: BorderRadius.circular(15),
@@ -34,7 +33,7 @@ class ExploreCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.network(
-                  category.image??"",
+                  category.image ?? "",
                   width: 120,
                   height: 90,
                   fit: BoxFit.contain,
@@ -43,7 +42,7 @@ class ExploreCard extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-             category.name??"",
+              category.name ?? "",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Tcolor.primaryText,

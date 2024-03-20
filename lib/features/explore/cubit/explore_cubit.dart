@@ -10,8 +10,8 @@ part 'explore_state.dart';
 class ExploreCubit extends Cubit<ExploreState> {
   ExploreCubit() : super(ExploreInitial());
 
-  void getAllCategories()async{
-      emit(ExploreLoading());
+  void getAllCategories() async {
+    emit(ExploreLoading());
     try {
       final resp = await dioClient.get("app/categories/");
       final List<ProductCategory> categories = [
