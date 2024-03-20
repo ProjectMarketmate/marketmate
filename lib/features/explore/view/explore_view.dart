@@ -6,7 +6,7 @@ import 'package:marketmate/app/utils/context_extension.dart';
 import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
 import 'package:marketmate/features/explore/view/exploredetail_view.dart';
 import 'package:marketmate/features/explore/view/search_view.dart';
-import 'package:marketmate/features/home/views/Product_details_view.dart';
+
 
 class ExploreView extends StatefulWidget {
   const ExploreView({super.key});
