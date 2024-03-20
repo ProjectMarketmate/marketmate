@@ -42,10 +42,7 @@ class CheckoutItemRow extends StatelessWidget {
                 SizedBox(
                   width: 15,
                 ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 17,
-                )
+                
               ],
             ),
           ),

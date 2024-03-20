@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
+import 'package:marketmate/features/cart/views/my_cart.dart';
 import 'package:marketmate/features/cart/views/order_accepted.dart';
 import 'package:marketmate/features/cart/views/order_failed.dart';
 import 'package:marketmate/features/cart/widgets/checkout_item_row.dart';
@@ -53,41 +54,18 @@ class _CheckoutViewState extends State<CheckoutView> {
             height: 1,
           ),
           CheckoutItemRow(
-              title: "Delivery", value: "Select Method", onPressed: () {}),
+              title: "Delivery", value: "Cash on Delivery", onPressed: () {}),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                child: Row(
-                  children: [
-                    Text(
-                      "Payment",
-                      style: TextStyle(
-                          color: Tcolor.secondaryText,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    Spacer(),
-                    Icon(
-                      Icons.payment,
-                      color: Tcolor.primary,
-                      size: 23,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 17,
-                    ),
-                  ],
-                ),
-              ),
+              
               Divider(
                 color: Colors.black26,
                 height: 1,
               ),
               CheckoutItemRow(
                   title: "Total Cost",
-                  value: "Rs.80",
+                  value: totalPrice.value.toString(),
                   onPressed: () {
                     showDialog(
                         context: context,
