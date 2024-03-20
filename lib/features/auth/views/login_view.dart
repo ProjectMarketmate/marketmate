@@ -5,6 +5,7 @@ import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/line_textfield.dart';
 
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
 
 import 'package:marketmate/features/auth/views/sign_up_view.dart';
@@ -121,10 +122,7 @@ class _LoginViewState extends State<LoginView> {
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
                           if (state is AuthSuccess) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MainScreen()));
+                           context.navigateReplaceAll(MainScreen());
                           }
 
                           if (state is AuthFailed) {
