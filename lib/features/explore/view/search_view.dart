@@ -80,7 +80,7 @@ class _SearchViewState extends State<SearchView> {
                                         if (state is SearchcubitSuccess) {
                 return GridView.builder(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 15,),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.75,

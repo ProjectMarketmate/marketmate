@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/home/views/home_view.dart';
 
 class OrderAcceptView extends StatefulWidget {
   const OrderAcceptView({super.key});
@@ -64,7 +66,7 @@ class _OrderAcceptViewState extends State<OrderAcceptView> {
                     RoundButton(title: "Track Order", onPressed: () {}),
                     TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                         context.navigateReplaceAll(const HomeView());
                         },
                         child: Text(
                           "Back to Home",

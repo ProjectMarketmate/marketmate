@@ -79,13 +79,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                         fontWeight: FontWeight.w700),
                   ),
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite_border_outlined,
-                      size: 25,
-                    ))
+                
               ],
+            ),
+            SizedBox(
+              height: 12,
             ),
             Text(
               // "qty${widget.product.stockAvailable}",
@@ -96,7 +94,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   fontWeight: FontWeight.w600),
             ),
             const SizedBox(
-              height: 15,
+              height: 17,
             ),
             Row(
               children: [
@@ -118,7 +116,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               ],
             ),
             const SizedBox(
-              height: 15,
+              height: 17,
             ),
             const Divider(
               color: Colors.black26,
@@ -131,7 +129,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 Expanded(
                   child: Text(
-                    "Product detils",
+                    "Product Details",
                     style: TextStyle(
                         color: Tcolor.primaryText,
                         fontSize: 16,
@@ -147,12 +145,22 @@ class _ProductDetailsState extends State<ProductDetails> {
               ],
             ),
             Text(
-              "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
+              widget.product.description ?? "",
+              // "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
               style: TextStyle(
                   color: Tcolor.secondaryText,
                   fontSize: 13,
                   fontWeight: FontWeight.w500),
+                  overflow: TextOverflow.ellipsis,
             ),
+            const SizedBox(
+              height: 15,
+            ),
+            
+            const SizedBox(
+              height: 15,
+            ),
+           
             const SizedBox(
               height: 15,
             ),
@@ -161,55 +169,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               height: 1,
             ),
             const SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "Nutritions",
-                    style: TextStyle(
-                        color: Tcolor.primaryText,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  height: 25,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Tcolor.placeholder.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                          color: Tcolor.placeholder.withOpacity(0.5),
-                          width: 1)),
-                  child: Text(
-                    "100g",
-                    style: TextStyle(
-                        color: Tcolor.primaryText,
-                        fontSize: 9,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
-                    ))
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const Divider(
-              color: Colors.black26,
-              height: 1,
-            ),
-            const SizedBox(
-              height: 15,
+              height: 30,
             ),
             Row(
               children: [
@@ -222,6 +182,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
+                
                 RatingBar.builder(
                   initialRating: 5,
                   minRating: 1,
@@ -238,16 +199,19 @@ class _ProductDetailsState extends State<ProductDetails> {
                     print(rating);
                   },
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
-                    ))
+                
               ],
             ),
+             
             const SizedBox(
-              height: 8,
+              height: 30,
+            ),
+            const Divider(
+              color: Colors.black26,
+              height: 1,
+            ),
+            const SizedBox(
+              height: 20,
             ),
             BlocConsumer<AddtocartCubit, AddtocartState>(
               listener: (context, state) {
