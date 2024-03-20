@@ -20,7 +20,8 @@ class AccountView extends StatefulWidget {
 class _AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
-    final user = (context.read<AuthCubit>().state as AuthSuccess).user;
+    var media = MediaQuery.sizeOf(context);
+    final user = context.select((AuthCubit c) => (c.state as AuthSuccess).user);
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -115,6 +116,9 @@ class _AccountViewState extends State<AccountView> {
                         HelpScreen(),
                       );
                     }),
+                    SizedBox(
+                      height: media.height * 0.28,
+                    ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -127,7 +131,12 @@ class _AccountViewState extends State<AccountView> {
                               MaterialPageRoute(
                                   builder: (context) => LoginView()));
 
-                          context.read<AuthCubit>().logout();
+                         Future.delayed(
+                           Duration(milliseconds: 500),
+                           () {
+                             context.read<AuthCubit>().logout();
+                           },
+                         );
                         },
                         height: 60,
                         shape: RoundedRectangleBorder(
