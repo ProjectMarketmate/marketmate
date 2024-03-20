@@ -38,23 +38,11 @@ class _LoginViewState extends State<LoginView> {
             )),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Image.asset(
-                  "assets/images/Frame.png",
-                  width: 20,
-                  height: 20,
-                )),
-          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

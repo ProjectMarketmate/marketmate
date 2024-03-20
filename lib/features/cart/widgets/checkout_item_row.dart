@@ -42,7 +42,6 @@ class CheckoutItemRow extends StatelessWidget {
                 SizedBox(
                   width: 15,
                 ),
-                
               ],
             ),
           ),

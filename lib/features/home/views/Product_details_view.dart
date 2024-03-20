@@ -79,7 +79,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                         fontWeight: FontWeight.w700),
                   ),
                 ),
-                
               ],
             ),
             SizedBox(
@@ -87,7 +86,9 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             Text(
               // "qty${widget.product.stockAvailable}",
-             widget.product.stockAvailable! ? "Stock is available" : "Stock is not available",
+              widget.product.stockAvailable!
+                  ? "Stock is available"
+                  : "Stock is not available",
               style: TextStyle(
                   color: Tcolor.secondaryText,
                   fontSize: 16,
@@ -151,16 +152,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                   color: Tcolor.secondaryText,
                   fontSize: 13,
                   fontWeight: FontWeight.w500),
-                  overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(
               height: 15,
             ),
-            
             const SizedBox(
               height: 15,
             ),
-           
             const SizedBox(
               height: 15,
             ),
@@ -182,7 +181,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                
                 RatingBar.builder(
                   initialRating: 5,
                   minRating: 1,
@@ -199,10 +197,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     print(rating);
                   },
                 ),
-                
               ],
             ),
-             
             const SizedBox(
               height: 30,
             ),

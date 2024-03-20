@@ -9,6 +9,10 @@ extension ContextExt on BuildContext {
     Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
   }
 
+  void pop() {
+    Navigator.of(this).pop();
+  }
+
   void navigateReplace(Widget page) {
     Navigator.of(this).pop();
     navigatePush(page);

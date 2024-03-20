@@ -61,7 +61,7 @@ class _CartItemRowState extends State<CartItemRow> {
                               color: Tcolor.primaryText,
                               fontSize: 16,
                               fontWeight: FontWeight.w700),
-                              overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.ellipsis,
                         )),
                         BlocConsumer<DeletefromcartCubit, DeletefromcartState>(
                           listener: (context, state) {
@@ -108,7 +108,6 @@ class _CartItemRowState extends State<CartItemRow> {
                           child: BlocConsumer<UpdatecartCubit, UpdatecartState>(
                             listener: (context, state) {
                               if (state is UpdatecartSuccess) {
-                           
                                 widget.onCountUpdate();
                               }
                               if (state is UpdatecartFailed) {

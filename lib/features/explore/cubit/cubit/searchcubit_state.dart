@@ -11,13 +11,10 @@ final class SearchcubitSuccess extends SearchcubitState {
   final List<Product> productList;
 
   SearchcubitSuccess(this.productList);
-  
 }
 
 final class SearchcubitFailed extends SearchcubitState {
   final String error;
 
   SearchcubitFailed({required this.error});
-
 }
-
