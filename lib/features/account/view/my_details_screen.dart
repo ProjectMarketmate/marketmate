@@ -1,9 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/common/models/user.dart';
 import 'package:marketmate/app/common/widgets/line_textfield.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
+import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/app/utils/dio_client.dart';
+import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
 
 class MyDetailsScreen extends StatefulWidget {
   final User? user;
@@ -33,6 +37,8 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
       _addressController.text = widget.user!.address;
     }
   }
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -127,12 +133,35 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                RoundButton(
-                  onPressed: () {
-                    _showSaveSuccessPopup(context);
-                  },
-                  title: 'Save',
-                ),
+                isLoading
+                    ? CircularProgressIndicator()
+                    : RoundButton(
+                        onPressed: () async {
+                          setState(() {
+                            isLoading = true;
+                          });
+
+                          try {
+                            final resp = await dioClient
+                                .patch('/account/profile/', data: {
+                              "first_name": _firstNameController.text,
+                              "last_name": _lastNameController.text,
+                              "email": _emailController.text,
+                              "address": _addressController.text,
+                              "mobile": _mobileController.text
+                            });
+                            _showSaveSuccessPopup(
+                                context, User.fromJson(resp.data));
+                          } catch (e) {
+                            print(e);
+                            context.showErrorMessage("Failed to update");
+                          }
+                          setState(() {
+                            isLoading = false;
+                          });
+                        },
+                        title: 'Save',
+                      ),
               ]),
             ),
           ),
@@ -141,7 +170,7 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
     );
   }
 
-  void _showSaveSuccessPopup(BuildContext context) {
+  void _showSaveSuccessPopup(BuildContext context, User user) {
     showDialog(
       barrierDismissible: true,
       useSafeArea: true,
@@ -153,7 +182,7 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              context.read<AuthCubit>().setUser(user);
             },
             child: Text('OK'),
           ),
