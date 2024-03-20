@@ -57,42 +57,38 @@ class _ExploreViewState extends State<ExploreView> {
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              height: 45,
-              decoration: BoxDecoration(
-                  color: const Color(0xffF2F3F2),
-                  borderRadius: BorderRadius.circular(15)),
-              alignment: Alignment.center,
-              child: TextField(
-                controller: txtSearch,
-                onChanged: (value) {
-                  if (value == "egg") {
-                    setState(() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SearchView()));
-                    });
-                  }
-                  setState(() {});
-                },
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Tcolor.primary,
-                    size: 35,
+            padding:  EdgeInsets.symmetric(horizontal: 20),
+            child: InkWell(
+              onTap: (){
+                context.navigatePush(SearchView());
+              },
+              child: Container(
+                height: 45,
+                decoration: BoxDecoration(
+                    color: const Color(0xffF2F3F2),
+                    borderRadius: BorderRadius.circular(15)),
+                alignment: Alignment.center,
+                child: TextField(
+                  controller: txtSearch,
+                 
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabled: false,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Tcolor.primary,
+                      size: 35,
+                    ),
+                    counterText: "",
+                    border: InputBorder.none,
+                    hintText: "Search Store",
+                    helperStyle: TextStyle(
+                        color: Tcolor.secondaryText,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
                   ),
-                  counterText: "",
-                  border: InputBorder.none,
-                  hintText: "Search Store",
-                  helperStyle: TextStyle(
-                      color: Tcolor.secondaryText,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
