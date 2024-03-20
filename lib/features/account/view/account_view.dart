@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/account/view/help_screen.dart';
 import 'package:marketmate/features/account/view/my_details_screen.dart';
 import 'package:marketmate/features/account/view/notification_screen.dart';
 import 'package:marketmate/features/account/view/orders_screen.dart';
@@ -59,13 +60,6 @@ class _AccountViewState extends State<AccountView> {
                                 SizedBox(
                                   width: 10,
                                 ),
-                                // IconButton(
-                                //     onPressed: () {},
-                                //     icon: Icon(
-                                //       Icons.edit,
-                                //       color: Tcolor.primary,
-                                //       size: 20,
-                                //     ))
                               ],
                             ),
                             Text(
@@ -85,10 +79,6 @@ class _AccountViewState extends State<AccountView> {
                   color: Colors.black26,
                   height: 1,
                 ),
-                // AccountRow(
-                //     title: "Orders",
-                //     icon: "assets/icons/Orders icon.png",
-                //     onPressed: () {}),
                 AccountRow(
                   title: "My Details",
                   icon: "assets/icons/My Details icon.png",
@@ -109,14 +99,6 @@ class _AccountViewState extends State<AccountView> {
                     );
                   },
                 ),
-                // AccountRow(
-                //     title: "Delivery",
-                //     icon: "assets/icons/Delicery address.png",
-                //     onPressed: () {}),
-                // AccountRow(
-                //     title: "Payment Methods",
-                //     icon: "assets/icons/Vector icon.png",
-                //     onPressed: () {}),
                 AccountRow(
                     title: "Notifications",
                     icon: "assets/icons/Bell icon.png",
@@ -125,12 +107,14 @@ class _AccountViewState extends State<AccountView> {
                         NotificationScreen(),
                       );
                     }),
-
                 AccountRow(
-                    title: "Help",
+                    title: "Help & Support",
                     icon: "assets/icons/help icon.png",
-                    onPressed: () {}),
-
+                    onPressed: () {
+                      context.navigatePush(
+                        HelpScreen(),
+                      );
+                    }),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
