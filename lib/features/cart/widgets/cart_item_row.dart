@@ -26,7 +26,7 @@ class _CartItemRowState extends State<CartItemRow> {
   Widget build(BuildContext context) {
     return InkWell(
         child: Container(
-      height: 140,
+      height: 110,
       padding: const EdgeInsets.symmetric(vertical: 10),
       color: Colors.white,
       child: Column(
@@ -61,6 +61,7 @@ class _CartItemRowState extends State<CartItemRow> {
                               color: Tcolor.primaryText,
                               fontSize: 16,
                               fontWeight: FontWeight.w700),
+                              overflow: TextOverflow.ellipsis,
                         )),
                         BlocConsumer<DeletefromcartCubit, DeletefromcartState>(
                           listener: (context, state) {

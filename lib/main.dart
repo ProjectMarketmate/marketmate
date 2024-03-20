@@ -10,6 +10,7 @@ import 'package:marketmate/features/cart/cubit/addtocart/addtocart_cubit.dart';
 import 'package:marketmate/features/cart/cubit/cart_cubit.dart';
 import 'package:marketmate/features/cart/cubit/deletefromcart/deletefromcart_cubit.dart';
 import 'package:marketmate/features/explore/cubit/category/category_cubit.dart';
+import 'package:marketmate/features/explore/cubit/cubit/searchcubit_cubit.dart';
 import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
 
 
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => AddtocartCubit()),
         BlocProvider(create: (ctx) => ExploreCubit()),
         BlocProvider(create: (ctx) => CategoryCubit()),
+        BlocProvider(create: (ctx) => SearchcubitCubit()),
       ],
       child: MaterialApp(
           title: 'Online Groceries',

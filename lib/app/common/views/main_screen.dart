@@ -86,31 +86,16 @@ class _MainScreenState extends State<MainScreen> {
             },
             child: BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
-                return Stack(
-                  children: [
-                    state.status == CartStatus.loading ?
+                return  state.status == CartStatus.loading ?
                       SizedBox(
                         height: 10,
                         width: 10,
                         child: const CircularProgressIndicator(),
                       )
-                      : Icon(Icons.shopping_cart_outlined),
-                    if (state.status == CartStatus.success &&
-                        state.cartItems.length > 0)
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        child: Container(
-                          width: 10,
-                          height: 10,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
-                  ],
-                );
+                      : (state.cartItems.length>0? Badge(
+                        smallSize: 10,
+                        
+                        child: Icon(Icons.shopping_cart_outlined)):Icon(Icons.shopping_cart_outlined));
               },
             ),
           ),
