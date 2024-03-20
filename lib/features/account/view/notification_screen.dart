@@ -8,6 +8,7 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notifications'),
+        backgroundColor: Color(0xff53B175),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
