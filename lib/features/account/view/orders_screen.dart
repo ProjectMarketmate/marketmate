@@ -58,7 +58,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Order Date: ${order.createdAt}"),
-                  Text("Status: ${order.status}"),
+                  Chip(
+                    label: Text("${order.status}",
+                  style: TextStyle(
+                    color: getStatusColor(order.status!)
+                  ),
+                  ),
+                  backgroundColor: getStatusColor(order.status!).withOpacity(0.1),
+                  ),
                 ],
               ),
 
@@ -73,5 +80,28 @@ class _OrdersScreenState extends State<OrdersScreen> {
         ),
       ),
     );
+  }
+
+  Color getStatusColor(String status){
+    switch (status) {
+      case ORDER_STATUS.PENDING:
+       return  Colors.orange;
+       
+      case ORDER_STATUS.DELIVERED:
+       return Colors.green;
+        break;
+      case ORDER_STATUS.CANCELED:
+       return Colors.red;
+        break;
+      case ORDER_STATUS.SHIPPED:
+       return  Colors.grey;
+        break;
+      case ORDER_STATUS.PROCESSING:
+       return  Colors.blue;
+        break;
+      default:
+       return Colors.grey;
+        break;
+    }
   }
 }

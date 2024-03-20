@@ -41,3 +41,21 @@ class Order {
         'items': items?.map((e) => e.toJson()).toList(),
       };
 }
+
+
+class ORDER_STATUS {
+  static const String PENDING = 'Pending';
+  static const String PROCESSING = 'Processing';
+  static const String SHIPPED = 'Shipped';
+  static const String DELIVERED = 'Delivered';
+  static const String CANCELED = 'Canceled';
+
+  static const Map<String, String> choices = {
+    PENDING: 'Pending',
+    PROCESSING: 'Processing',
+    SHIPPED: 'Shipped',
+    DELIVERED: 'Delivered',
+    CANCELED: 'Canceled',
+  };
+}
+
