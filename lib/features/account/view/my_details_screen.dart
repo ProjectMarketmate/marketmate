@@ -143,6 +143,9 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
 
   void _showSaveSuccessPopup(BuildContext context) {
     showDialog(
+      barrierDismissible: true,
+      useSafeArea: true,
+      barrierColor: Colors.black.withOpacity(0.5),
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Success!'),
