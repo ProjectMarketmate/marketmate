@@ -101,7 +101,10 @@ class _MyCartState extends State<MyCart> {
                       MaterialButton(
                         onPressed: () {
                           //bottomsheet pop up function
-                          showcheckout();
+                           if(state.cartItems.length > 0){
+                             showcheckout();
+                           }
+                         
                         },
                         height: 60,
                         shape: RoundedRectangleBorder(
