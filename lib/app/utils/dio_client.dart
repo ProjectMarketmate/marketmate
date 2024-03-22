@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:marketmate/app/utils/logman_dio_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final isDev = false;
@@ -26,4 +27,4 @@ final dioClient = Dio(
         return handler.next(options);
       },
     ),
-  );
+  )..interceptors.add(LogmanDioInterceptor());

@@ -35,19 +35,19 @@ class _FilterViewState extends State<FilterView> {
   List filterbrandArr = [
     {
       "id": "1",
-      "name": "Individual Collection",
+      "name": "Fruits",
     },
     {
       "id": "2",
-      "name": "Cocola",
+      "name": "Foods",
     },
     {
       "id": "3",
-      "name": "Ifad",
+      "name": "Non Foods",
     },
     {
       "id": "4",
-      "name": "Kazi farmas",
+      "name": "Vegitables",
     },
   ];
   @override

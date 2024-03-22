@@ -8,7 +8,7 @@ import 'package:marketmate/app/utils/dio_client.dart';
 import 'package:marketmate/features/cart/cubit/cart_cubit.dart';
 import 'package:marketmate/features/cart/views/my_cart.dart';
 import 'package:marketmate/features/cart/views/order_accepted.dart';
-import 'package:marketmate/features/cart/views/order_failed_view.dart';
+import 'package:marketmate/features/cart/widgets/order_failed_dialogue.dart';
 import 'package:marketmate/features/cart/widgets/checkout_item_row.dart';
 
 class CheckoutView extends StatefulWidget {
@@ -71,15 +71,15 @@ class _CheckoutViewState extends State<CheckoutView> {
                   title: "Total Cost",
                   value: totalPrice.value.toString(),
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Dialog(
-                              backgroundColor: Colors.transparent,
-                              insetPadding:
-                                  EdgeInsets.symmetric(horizontal: 20),
-                              child: OrderFailedView());
-                        });
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (context) {
+                    //       return Dialog(
+                    //           backgroundColor: Colors.transparent,
+                    //           insetPadding:
+                    //               EdgeInsets.symmetric(horizontal: 20),
+                    //           child: OrderFailedDialogue());
+                    //     });
                   }),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -133,7 +133,9 @@ class _CheckoutViewState extends State<CheckoutView> {
                     } catch (e) {
                       context.pop();
                       print(e);
-                      context.showErrorMessage("Something went wrong");
+                      showDialog(context: context, builder: (context) {
+                        return Dialog(child: OrderFailedDialogue());
+                      });
                     } finally {
                       setState(() {
                         isLoading = false;

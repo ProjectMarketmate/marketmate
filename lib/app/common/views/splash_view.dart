@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logman/logman.dart';
 import 'package:marketmate/app/common/views/main_screen.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/views/welcomepage.dart';
@@ -19,6 +20,11 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     context.read<AuthCubit>().loadUser();
+      // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      //   Logman.instance.attachOverlay(
+      //     context: context
+      //   );
+      // });
   }
 
   @override

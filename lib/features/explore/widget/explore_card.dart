@@ -34,20 +34,22 @@ class ExploreCard extends StatelessWidget {
               children: [
                 Image.network(
                   category.image ?? "",
-                  width: 120,
-                  height: 90,
+                  width: 135,
+                  height: 105,
                   fit: BoxFit.contain,
                 ),
               ],
             ),
             const Spacer(),
-            Text(
-              category.name ?? "",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Tcolor.primaryText,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700),
+            Center(
+              child: Text(
+                category.name ?? "",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Tcolor.primaryText,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700),
+              ),
             ),
             const Spacer(),
           ],

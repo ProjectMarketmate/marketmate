@@ -118,7 +118,24 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       SectionView(
                         title: "Exclusive Offers",
-                        onPressed: () {},
+                        onPressed: () {
+                        //   GridView.builder(
+                        // padding: const EdgeInsets.symmetric(
+                        //   vertical: 15,
+                        // ),
+                        // gridDelegate:
+                        //     const SliverGridDelegateWithFixedCrossAxisCount(
+                        //         crossAxisCount: 2,
+                        //         childAspectRatio: 0.75,
+                        //         crossAxisSpacing: 8,
+                        //         mainAxisSpacing: 10),
+                        // itemCount: state.products.length,
+                        // itemBuilder: (context, index) {
+                        //   return ProductCard(
+                        //     product: state.products[index],
+                        //   );
+                        // });
+                        },
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 20),
                       ),
