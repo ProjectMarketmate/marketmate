@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marketmate/app/common/models/order/order.dart';
-import 'package:marketmate/app/common/widgets/roundbutton.dart';
+
 import 'package:marketmate/app/utils/context_extension.dart';
 import 'package:marketmate/app/utils/dio_client.dart';
 import 'package:marketmate/features/account/view/order_detail_screen.dart';
-import 'package:marketmate/features/cart/models/cart_item.dart';
-import 'package:marketmate/features/cart/views/my_cart.dart';
-import 'package:marketmate/features/cart/widgets/cart_item_row.dart';
+
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({Key? key});
@@ -27,6 +25,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
   }
 
   void getOrders()async{
+    setState(() {
+      isLoading = true;
+    });
       try {
         final resp  = await dioClient.get('/app/order/');
         orders = [for (var item in resp.data) Order.fromJson(item)];
@@ -48,34 +49,43 @@ class _OrdersScreenState extends State<OrdersScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: isLoading? Center(child: CircularProgressIndicator(),):SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            children: [
-             for (var order in orders) ListTile(
-              title: Text("Order ID: ${order.id}"),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Order Date: ${order.createdAt}"),
-                  Chip(
-                    label: Text("${order.status}",
-                  style: TextStyle(
-                    color: getStatusColor(order.status!)
-                  ),
-                  ),
-                  backgroundColor: getStatusColor(order.status!).withOpacity(0.1),
-                  ),
-                ],
+        child: isLoading? Center(child: CircularProgressIndicator(),):RefreshIndicator(
+          onRefresh: ()async{
+
+            getOrders();
+          },
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Column(
+              children: [
+               for (var order in orders.reversed) ListTile(
+                title: Text("Order ID: ${order.id}"),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Order Date: ${order.createdAt}"),
+                    Chip(
+                      label: Text("${order.status}",
+                    style: TextStyle(
+                      color: getStatusColor(order.status!)
+                    ),
+                    ),
+                    backgroundColor: getStatusColor(order.status!).withOpacity(0.1),
+                    ),
+                  ],
+                ),
+          
+                trailing: Icon(Icons.arrow_forward_ios),
+                onTap: (){
+                    context.navigatePush(OrderDetailScreen(
+                      order: order,
+                      getOrders: getOrders,
+                    ));
+                },
               ),
-
-              trailing: Icon(Icons.arrow_forward_ios),
-              onTap: (){
-                  context.navigatePush(OrderDetailScreen(order: order));
-              },
+          
+              ],
             ),
-
-            ],
           ),
         ),
       ),
@@ -89,19 +99,19 @@ class _OrdersScreenState extends State<OrdersScreen> {
        
       case ORDER_STATUS.DELIVERED:
        return Colors.green;
-        break;
+        
       case ORDER_STATUS.CANCELED:
        return Colors.red;
-        break;
+        
       case ORDER_STATUS.SHIPPED:
        return  Colors.grey;
-        break;
+        
       case ORDER_STATUS.PROCESSING:
        return  Colors.blue;
-        break;
+       
       default:
        return Colors.grey;
-        break;
+       
     }
   }
 }

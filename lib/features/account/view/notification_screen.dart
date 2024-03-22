@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+   bool _smsNotifications = true;
+   bool _emailNotifications = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +26,12 @@ class NotificationScreen extends StatelessWidget {
               leading: Icon(Icons.notifications),
               title: Text('Turn on notifications'),
               trailing: Switch(
-                value: true,
-                onChanged: (value) {},
+                value: _emailNotifications,
+                onChanged: (value) {
+                  setState(() {
+                    _emailNotifications = value;
+                  });
+                },
               ),
             ),
             const Divider(),
@@ -28,8 +39,12 @@ class NotificationScreen extends StatelessWidget {
               leading: Icon(Icons.sms),
               title: Text('SMS notifications'),
               trailing: Switch(
-                value: true,
-                onChanged: (value) {},
+                value: _smsNotifications,
+                onChanged: (value) {
+                  setState(() {
+                    _smsNotifications = value;
+                  });
+                },
               ),
             ),
             const Divider(),

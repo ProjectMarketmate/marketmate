@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketmate/app/common/cubit/main_cubit.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
 import 'package:marketmate/app/common/widgets/line_textfield.dart';
@@ -122,7 +123,8 @@ class _LoginViewState extends State<LoginView> {
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
                           if (state is AuthSuccess) {
-                           context.navigateReplaceAll(MainScreen());
+                           context.navigateReplaceAll(const MainScreen());
+                          context.read<MainCubit>().changeIndex(0);
                           }
 
                           if (state is AuthFailed) {

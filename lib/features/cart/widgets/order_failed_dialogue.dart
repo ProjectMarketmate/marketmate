@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
 
-class OrderFailedView extends StatelessWidget {
-  const OrderFailedView({super.key});
+class OrderFailedDialogue extends StatelessWidget {
+  const OrderFailedDialogue({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +16,7 @@ class OrderFailedView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.close))
-            ],
-          ),
+          
           SizedBox(
             height: 10,
           ),
@@ -57,19 +49,21 @@ class OrderFailedView extends StatelessWidget {
           SizedBox(
             height: 40,
           ),
-          RoundButton(title: "Please Try Again", onPressed: () {}),
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                "Back to Home",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Tcolor.primaryText,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500),
-              ))
+          RoundButton(title: "Please Try Again", onPressed: () {
+            Navigator.pop(context);
+          }),
+          // TextButton(
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //     child: Text(
+          //       "Back to Home",
+          //       textAlign: TextAlign.left,
+          //       style: TextStyle(
+          //           color: Tcolor.primaryText,
+          //           fontSize: 18,
+          //           fontWeight: FontWeight.w500),
+          //     ))
         ],
       ),
     );

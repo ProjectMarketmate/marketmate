@@ -152,14 +152,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                   color: Tcolor.secondaryText,
                   fontSize: 13,
                   fontWeight: FontWeight.w500),
-              overflow: TextOverflow.ellipsis,
+              // overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
+           
+           
             const SizedBox(
               height: 15,
             ),
