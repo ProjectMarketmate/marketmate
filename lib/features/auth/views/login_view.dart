@@ -21,7 +21,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   TextEditingController txtEmail =
-      TextEditingController(text: "amjad@gmail.com");
+      TextEditingController(text: "ahamed@gmail.com");
   TextEditingController txtPassword = TextEditingController(text: "1234");
   bool isShow = false;
 
