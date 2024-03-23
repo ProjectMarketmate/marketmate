@@ -116,9 +116,9 @@ class _AccountViewState extends State<AccountView> {
                         HelpScreen(),
                       );
                     }),
-                    SizedBox(
-                      height: media.height * 0.28,
-                    ),
+                SizedBox(
+                  height: media.height * 0.28,
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -131,12 +131,12 @@ class _AccountViewState extends State<AccountView> {
                               MaterialPageRoute(
                                   builder: (context) => LoginView()));
 
-                         Future.delayed(
-                           Duration(milliseconds: 500),
-                           () {
-                             context.read<AuthCubit>().logout();
-                           },
-                         );
+                          Future.delayed(
+                            Duration(milliseconds: 500),
+                            () {
+                              context.read<AuthCubit>().logout();
+                            },
+                          );
                         },
                         height: 60,
                         shape: RoundedRectangleBorder(

@@ -35,7 +35,7 @@ class _SearchViewState extends State<SearchView> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             Container(

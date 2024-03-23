@@ -1,7 +1,5 @@
 import 'package:marketmate/app/common/models/products.dart';
 
-
-
 class Item {
   int? id;
   Product? product;

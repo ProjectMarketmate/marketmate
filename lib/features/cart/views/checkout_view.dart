@@ -133,9 +133,11 @@ class _CheckoutViewState extends State<CheckoutView> {
                     } catch (e) {
                       context.pop();
                       print(e);
-                      showDialog(context: context, builder: (context) {
-                        return Dialog(child: OrderFailedDialogue());
-                      });
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(child: OrderFailedDialogue());
+                          });
                     } finally {
                       setState(() {
                         isLoading = false;

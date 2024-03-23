@@ -67,9 +67,11 @@ class _OrderAcceptViewState extends State<OrderAcceptView> {
                     ),
                     Spacer(),
                     Spacer(),
-                    RoundButton(title: "Track Order", onPressed: () {
-                      context.navigateReplace(OrdersScreen());
-                    }),
+                    RoundButton(
+                        title: "Track Order",
+                        onPressed: () {
+                          context.navigateReplace(OrdersScreen());
+                        }),
                     TextButton(
                         onPressed: () {
                           context.navigateReplaceAll(const MainScreen());

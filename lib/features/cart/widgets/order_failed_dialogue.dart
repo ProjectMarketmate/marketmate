@@ -16,7 +16,6 @@ class OrderFailedDialogue extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          
           SizedBox(
             height: 10,
           ),
@@ -49,9 +48,11 @@ class OrderFailedDialogue extends StatelessWidget {
           SizedBox(
             height: 40,
           ),
-          RoundButton(title: "Please Try Again", onPressed: () {
-            Navigator.pop(context);
-          }),
+          RoundButton(
+              title: "Please Try Again",
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           // TextButton(
           //     onPressed: () {
           //       Navigator.pop(context);

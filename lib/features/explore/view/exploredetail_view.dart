@@ -78,7 +78,7 @@ class _ExploreDetailState extends State<ExploreDetail> {
             if (state is CategorySuccess) {
               return GridView.builder(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.75,

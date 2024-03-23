@@ -184,7 +184,6 @@ class _MyDetailsScreenState extends State<MyDetailsScreen> {
             onPressed: () {
               context.read<AuthCubit>().setUser(user);
               Navigator.pop(context);
-
             },
             child: Text('OK'),
           ),

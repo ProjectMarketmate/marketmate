@@ -8,9 +8,11 @@ import 'package:marketmate/app/common/widgets/line_textfield.dart';
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
 import 'package:marketmate/app/utils/context_extension.dart';
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
+import 'package:marketmate/features/auth/views/passwordless_view.dart';
 
 import 'package:marketmate/features/auth/views/sign_up_view.dart';
 import 'package:marketmate/app/common/views/main_screen.dart';
+import 'package:marketmate/features/auth/views/verification_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -107,7 +109,9 @@ class _LoginViewState extends State<LoginView> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.navigatePush(PasswordLessView());
+                              },
                               child: Text(
                                 "Forgot Password?",
                                 style: TextStyle(
@@ -123,8 +127,8 @@ class _LoginViewState extends State<LoginView> {
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
                           if (state is AuthSuccess) {
-                           context.navigateReplaceAll(const MainScreen());
-                          context.read<MainCubit>().changeIndex(0);
+                            context.navigateReplaceAll(const MainScreen());
+                            context.read<MainCubit>().changeIndex(0);
                           }
 
                           if (state is AuthFailed) {

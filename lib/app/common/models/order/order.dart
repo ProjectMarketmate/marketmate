@@ -18,7 +18,7 @@ class Order {
   });
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
-    id: json['id'] as int?,
+        id: json['id'] as int?,
         user: json['user'] as int?,
         status: json['status'] as String?,
         createdAt: json['created_at'] == null
@@ -33,7 +33,7 @@ class Order {
       );
 
   Map<String, dynamic> toJson() => {
-    'id': id,
+        'id': id,
         'user': user,
         'status': status,
         'created_at': createdAt?.toIso8601String(),
@@ -41,7 +41,6 @@ class Order {
         'items': items?.map((e) => e.toJson()).toList(),
       };
 }
-
 
 class ORDER_STATUS {
   static const String PENDING = 'Pending';
@@ -58,4 +57,3 @@ class ORDER_STATUS {
     CANCELED: 'Canceled',
   };
 }
-
