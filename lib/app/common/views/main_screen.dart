@@ -62,7 +62,6 @@ class _MainScreenState extends State<MainScreen> {
               ],
             ),
             child: NavigationBar(
-               
               elevation: 5,
               backgroundColor: Colors.white,
               onDestinationSelected: (value) {
@@ -73,8 +72,6 @@ class _MainScreenState extends State<MainScreen> {
                 NavigationDestination(
                   icon: Icon(Icons.home_outlined),
                   label: "Home",
-                  
-                  
                 ),
                 NavigationDestination(
                   icon: Icon(Icons.explore_outlined),
@@ -113,7 +110,6 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         );
-       
       },
     );
   }

@@ -16,6 +16,7 @@ import 'package:marketmate/features/explore/cubit/explore_cubit.dart';
 import 'package:marketmate/features/home/cubit/home_view_cubit.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketmate/features/home/cubit/homebanner/homebanner_cubit.dart';
 import 'package:marketmate/features/home/cubit/productcubit/productdetail_cubit.dart';
 
 void main() {
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => ExploreCubit()),
         BlocProvider(create: (ctx) => CategoryCubit()),
         BlocProvider(create: (ctx) => SearchcubitCubit()),
+        BlocProvider(create: (ctx) => HomeViewCubit()),
+        BlocProvider(create: (ctx) => HomebannerCubit()),
       ],
       child: MaterialApp(
           title: 'Online Groceries',

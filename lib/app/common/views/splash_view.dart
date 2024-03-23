@@ -20,11 +20,11 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     context.read<AuthCubit>().loadUser();
-      // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      //   Logman.instance.attachOverlay(
-      //     context: context
-      //   );
-      // });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   Logman.instance.attachOverlay(
+    //     context: context
+    //   );
+    // });
   }
 
   @override

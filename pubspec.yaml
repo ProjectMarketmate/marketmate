@@ -45,6 +45,7 @@ dependencies:
   riverpod: ^2.5.0
   url_launcher: ^6.2.5
   logman: 0.0.5
+  carousel_slider: ^4.2.1
 
 
 dev_dependencies:
@@ -139,8 +140,11 @@ flutter:
     - assets/images/order_failed_image.png
     - assets/images/checkedmark.png
     - assets/images/useraccount.png
-
+    - assets/icons/otp.png
     - assets/icons/
+   
+
+    
    
 
   # An image asset can refer to one or more resolution-specific "variants", see

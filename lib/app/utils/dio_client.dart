@@ -16,7 +16,8 @@ final _baseOptions = BaseOptions(
 
 final dioClient = Dio(
   _baseOptions,
-)..interceptors.add(
+)
+  ..interceptors.add(
     InterceptorsWrapper(
       onRequest: (options, handler) async {
         final shared = await SharedPreferences.getInstance();
@@ -27,4 +28,5 @@ final dioClient = Dio(
         return handler.next(options);
       },
     ),
-  )..interceptors.add(LogmanDioInterceptor());
+  )
+  ..interceptors.add(LogmanDioInterceptor());

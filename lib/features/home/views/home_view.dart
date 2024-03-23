@@ -1,6 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
+import 'package:marketmate/features/home/cubit/homebanner/homebanner_cubit.dart';
 
 import 'package:marketmate/features/home/widgets/product_card.dart';
 
@@ -23,7 +25,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     context.read<HomeViewCubit>().getProducts();
-
+    context.read<HomebannerCubit>().getHomeBanner();
     super.initState();
   }
 
@@ -53,12 +55,13 @@ class _HomeViewState extends State<HomeView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text('Hello ${user.firstName}',style: TextStyle(
-                          fontSize: 20,fontWeight:FontWeight.w500
-                        ),),
+                        child: Text(
+                          'Hello ${user.firstName}',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
                       ),
                       SizedBox(
                         height: media.width * 0.01,
@@ -99,49 +102,105 @@ class _HomeViewState extends State<HomeView> {
                         height: media.width * 0.03,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                            width: double.maxFinite,
-                            height: 115,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffF2F3F2),
-                                borderRadius: BorderRadius.circular(15)),
-                            alignment: Alignment.center,
-                            child: Stack(children: [
-                              Image.asset(
-                                "assets/images/banner_background.png",
-                                fit: BoxFit.cover,
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: BlocConsumer<HomebannerCubit, HomebannerState>(
+                          listener: (context, state) {
+                            
+                          },
+                          builder: (context, state) {
+                           if (state is HomebannerSuccess) {
+                            return CarouselSlider(
+  options: CarouselOptions(height: 120.0,
+  autoPlay: true, // Enable auto-scrolling
+    autoPlayInterval: Duration(seconds: 3), // Set auto-scroll interval
+    autoPlayAnimationDuration: Duration(milliseconds: 800), // Set animation duration
+    autoPlayCurve: Curves.fastOutSlowIn, // Set animation curve
+  
+  ),
+  
+  items: state.banner.map((i) {
+    return Builder(
+      builder: (BuildContext context) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 3),
+          decoration: BoxDecoration(
+            color: Tcolor.primary.withAlpha(80),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow:  [BoxShadow(
+              color: Color.fromARGB(255, 81, 80, 80),
+              blurRadius: 100,
+              offset: Offset(0, 130),
+              spreadRadius: 2,
+              blurStyle: BlurStyle.inner
+            )]
+          ),
+          child:  Stack(
+            children: [
+              Row(
+                children: [
+                  Image.network(i.image??"", fit: BoxFit.fill),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          i.title??'',
+                          style: TextStyle(
+                              color: Tcolor.primaryText,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500)),
+                              SizedBox(
+                                height: 5,
                               ),
-                              Row(
-                                children: [
-                                  Image.asset("assets/images/banner_image.png"),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Image.asset("assets/images/Group 6811.png"),
-                                ],
-                              )
-                            ])),
+                        Text(
+                          i.description??'',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 81, 80, 80),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w300)),
+                              
+                ],
+              ),
+
+              )
+              ],
+            ),
+            ]));
+      },
+    );
+  }).toList(),
+);
+                           }
+                           return Center(
+                             child: CircularProgressIndicator(),
+                           );
+                          },
+                        ),
                       ),
                       SectionView(
                         title: "Exclusive Offers",
                         onPressed: () {
-                        //   GridView.builder(
-                        // padding: const EdgeInsets.symmetric(
-                        //   vertical: 15,
-                        // ),
-                        // gridDelegate:
-                        //     const SliverGridDelegateWithFixedCrossAxisCount(
-                        //         crossAxisCount: 2,
-                        //         childAspectRatio: 0.75,
-                        //         crossAxisSpacing: 8,
-                        //         mainAxisSpacing: 10),
-                        // itemCount: state.products.length,
-                        // itemBuilder: (context, index) {
-                        //   return ProductCard(
-                        //     product: state.products[index],
-                        //   );
-                        // });
+                          //   GridView.builder(
+                          // padding: const EdgeInsets.symmetric(
+                          //   vertical: 15,
+                          // ),
+                          // gridDelegate:
+                          //     const SliverGridDelegateWithFixedCrossAxisCount(
+                          //         crossAxisCount: 2,
+                          //         childAspectRatio: 0.75,
+                          //         crossAxisSpacing: 8,
+                          //         mainAxisSpacing: 10),
+                          // itemCount: state.products.length,
+                          // itemBuilder: (context, index) {
+                          //   return ProductCard(
+                          //     product: state.products[index],
+                          //   );
+                          // });
                         },
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 20),

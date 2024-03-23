@@ -69,7 +69,9 @@ class ProductCard extends StatelessWidget {
                     )),
               ],
             ),
-            const Spacer(),
+            const SizedBox(
+              height: 30,
+            ),
             Text(
               product.name ?? "",
               style: TextStyle(

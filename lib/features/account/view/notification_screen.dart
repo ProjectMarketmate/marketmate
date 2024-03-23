@@ -8,8 +8,8 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-   bool _smsNotifications = true;
-   bool _emailNotifications = true;
+  bool _smsNotifications = true;
+  bool _emailNotifications = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
