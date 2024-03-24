@@ -59,7 +59,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
                     children: [
-                      for (var order in orders.reversed)
+                      for (var order in orders.reversed.take(20))
                         ListTile(
                           title: Text("Order ID: ${order.id}"),
                           subtitle: Column(

@@ -60,7 +60,15 @@ class _HomeViewState extends State<HomeView> {
                         child: Text(
                           'Hello ${user.firstName}',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
+                              fontSize: 20, fontWeight: FontWeight.w500
+                              ,shadows: [Shadow(
+                              color: Tcolor.primaryText,
+                              offset: Offset(0.0, 1.0),
+            blurRadius: 1.0
+                              )]
+                              
+                              ),
+                              
                         ),
                       ),
                       SizedBox(
@@ -98,6 +106,7 @@ class _HomeViewState extends State<HomeView> {
                             ),
                           ),
                         ),
+                        //home page starting///////////////////////////////
                       SizedBox(
                         height: media.width * 0.03,
                       ),
@@ -118,6 +127,7 @@ class _HomeViewState extends State<HomeView> {
   
   ),
   
+  
   items: state.banner.map((i) {
     return Builder(
       builder: (BuildContext context) {
@@ -134,6 +144,7 @@ class _HomeViewState extends State<HomeView> {
               spreadRadius: 2,
               blurStyle: BlurStyle.inner
             )]
+            
           ),
           child:  Stack(
             children: [
@@ -153,7 +164,19 @@ class _HomeViewState extends State<HomeView> {
                           style: TextStyle(
                               color: Tcolor.primaryText,
                               fontSize: 20,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w500,
+                              shadows: [Shadow(
+                              color: Tcolor.primaryText,
+                              offset: Offset(0.0, 1.0),
+                                blurRadius: 2.0
+                              )]
+                              
+                              
+                              
+                              )
+                              
+                              
+                              ),
                               SizedBox(
                                 height: 5,
                               ),
@@ -235,27 +258,7 @@ class _HomeViewState extends State<HomeView> {
                               );
                             }),
                       ),
-                      // SizedBox(
-                      //   height: 230,
-                      //   child: ListView.builder(
-                      //       scrollDirection: Axis.horizontal,
-                      //       padding: const EdgeInsets.symmetric(horizontal: 15),
-                      //       itemCount: bestSellingArr.length,
-                      //       itemBuilder: (context, index) {
-                      //         var pObj = bestSellingArr[index] as Map? ?? {};
-                      //         return ProductCard(
-                      //           pObj: pObj,
-                      //           onPressed: () {
-                      //             Navigator.push(
-                      //                 context,
-                      //                 MaterialPageRoute(
-                      //                     builder: (context) =>
-                      //                         const ProductDetails()));
-                      //           },
-                      //           onCart: () {},
-                      //         );
-                      //       }),
-                      // ),
+                     
                       // SectionView(
                       //   title: "Groceries",
                       //   onPressed: () {},
