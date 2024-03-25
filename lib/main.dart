@@ -3,6 +3,7 @@ import 'package:marketmate/app/common/cubit/main_cubit.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 
 import 'package:marketmate/features/auth/cubit/auth_cubit.dart';
+import 'package:marketmate/features/auth/cubit/passwordless/passwordless_cubit.dart';
 import 'package:marketmate/features/auth/cubit/signup/signup_cubit.dart';
 
 import 'package:marketmate/app/common/views/splash_view.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => SearchcubitCubit()),
         BlocProvider(create: (ctx) => HomeViewCubit()),
         BlocProvider(create: (ctx) => HomebannerCubit()),
+         BlocProvider(create: (ctx) => PasswordlessCubit()),
       ],
       child: MaterialApp(
           title: 'Online Groceries',

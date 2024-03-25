@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:marketmate/app/common/widgets/line_textfield.dart';
 
 import 'package:marketmate/app/common/widgets/roundbutton.dart';
 import 'package:marketmate/app/utils/color_extension.dart';
 import 'package:marketmate/app/utils/context_extension.dart';
+import 'package:marketmate/features/auth/cubit/passwordless/passwordless_cubit.dart';
 import 'package:marketmate/features/auth/views/verification_view.dart';
 
 class PasswordLessView extends StatefulWidget {
@@ -83,11 +85,28 @@ class _PasswordLessViewState extends State<PasswordLessView> {
                       SizedBox(
                         height: media.width * 0.07,
                       ),
-                      RoundButton(
-                          title: "Get OTP",
-                          onPressed: () {
+                      BlocConsumer<PasswordlessCubit, PasswordlessState>(
+                        listener: (context, state) {
+                          if (state is PasswordlessSuccess) {
                             context.navigatePush(VerificationView());
-                          })
+                          }
+                          if(state is PasswordlessFailed){
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid Email")));
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is PasswordlessLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return RoundButton(
+                              title: "Get OTP",
+                              onPressed: () {
+                                // context.read<PasswordlessCubit>().sendOtp(txtEmail.text());
+                              });
+                        },
+                      )
                     ],
                   )),
             ),

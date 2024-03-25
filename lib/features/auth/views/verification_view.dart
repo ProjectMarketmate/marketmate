@@ -35,7 +35,7 @@ class _VerificationViewState extends State<VerificationView> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back_ios)),
+                icon: Icon(Icons.arrow_back_ios,color: Colors.black,)),
           ),
           body: SafeArea(
             child: SingleChildScrollView(
