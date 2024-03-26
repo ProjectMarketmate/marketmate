@@ -15,6 +15,11 @@ class PasswordlessCubit extends Cubit<PasswordlessState> {
       final resp= await dioClient.post('/account/passwordless/', data: {
         'email': email
       });
+
+      emit(PasswordlessSuccess(
+        email: email
+      ));
+      
       
     } catch (e) {
       
