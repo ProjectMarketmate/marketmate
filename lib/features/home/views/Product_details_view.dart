@@ -176,7 +176,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
                 RatingBar.builder(
-                  initialRating: 5,
+                  initialRating: 1.5,
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
